@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>El Cedro - Cotizar</title>
+	<!-- CSS y Bootstrap -->
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="CSS/CotizarC.css">
+	<link rel="stylesheet" href="CSS/Slide - Menú.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="js/jsPDF/dist/jspdf.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="Social bar/font.css">
+	<link rel="stylesheet" href="Social bar/main.css">
+	<link rel="stylesheet" href="Social bar/style.css">
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/cotizar.svg" />
+	<!-- Logo -->
+</head>
+
+<body>
+
+	<!--Alerta Inicio-->
+	<script>
+
+		//swal({
+		//	title: "Recuerda!",
+		//	text: "que esta cotización es solo una aproximación al precio real del producto. Comunicate con nosotros via Whatsapp para hacer tu cotización.",
+		//	imageUrl: "images/thumbs-up.jpg"
+		//});
+
+		function valor() {
+			var x = + document.getElementById('select1').value;
+			var y = + document.getElementById('select2').value;
+			var c = + document.getElementById('select3').value;
+			var cant = document.getElementById('cant').value;
+			document.getElementById('result').innerHTML = ((x + y + c) * cant);
+		}
+
+	</script>
+	<!--Alerta Inicio-->
+
+
+	<!--JavaScript-->
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<script src="/js/MensajeIndex.js"></script>
+	<script src="/js/validar.js"></script>
+
+	<script src="/js/ExportarCotizacion.js"></script>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jsPDF/dist/jspdf.min.js"></script>
+
+	/*Exportar*/
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
+	<script src="/js/Exportar TABLE.js"></script>
+	<script src="/js/html2pdf.bundle.js"></script>
+	/*Exportar*/
+
+	<!--JavaScript-->
+
+	<!--Mensaje-->
+	<script>
+		function Cerrar() {
+			window.alert(
+				"¿Seguro quieres cerrar esta sesión?"
+			)
+		}
+	</script>
+	<!--Mensaje-->
+
+
+
+	<!--Header-->
+	<header>
+
+		<a href="">
+			<img src="/IMG/Header-web.png" title="El Cedro" style="margin-top:-2% ; width: 100%; " />
+
+	</header>
+	<!--Header-->
+
+	<!--Menu-->
+	<div class="container" style="max-width: 150%;">
+		<div class="tutorial">
+			<ul>
+				<a href="index">
+					<li>Inicio</li>
+				</a>
+
+				<th:block sec:authorize="isAnonymous()">
+					<a href="/login">
+						<li>Iniciar sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></li>
+				</th:block>
+
+				</a>
+				<li>Inspiración<i class="fa fa-angle-down"></i>
+					<ul style="max-width: 120%;">
+						<a href="https://www.calameo.com/read/0064764772511493c05db" target="_blank">
+							<li>Salas</li>
+						</a>
+						<a href="https://www.calameo.com/read/0064764772aef44efd3a8" target="_blank">
+							<li>Comedores</li>
+						</a>
+						<a href="https://www.calameo.com/read/0064764770940b817492e" target="_blank">
+							<li>Closets</li>
+						</a>
+						<a href="https://www.calameo.com/read/006476477ff6d6f41cc58" target="_blank">
+							<li>Alcobas</li>
+						</a>
+					</ul>
+				</li>
+
+				<th:block sec:authorize="hasAuthority('Administrador')">
+					<a href="/administradores">
+						<li>Dashboard</li><a />
+				</th:block>
+
+				<th:block sec:authorize="hasAuthority('Jefe de produccion')">
+					<a href="/dashboardP">
+						<li>Dashboard producción</li><a />
+				</th:block>
+
+				<th:block sec:authorize="hasAuthority('Vendedor')">
+					<a href="/dashboardV">
+						<li>Dashboard ventas</li><a />
+				</th:block>
+
+				<a onclick="mensaje()">
+					<li>Contactanos</li><a />
+
+					<!--Usuario y cerrar sesion-->
+
+					<div sec:authorize="isAuthenticated()" style="float: right; text-decoration: none;">
+						<a onclick="Cerrar()" th:href="@{/logout}" style="color: black;"
+							sec:authorize="isAuthenticated()" title="Cerrar sesión">
+							<img src="/IMG/turn-off.png" style="max-width: 17px;margin-top: -4%;"></img>
+						</a>
+						<li title="usuario actual" sec:authentication="principal.username"></li>
+					</div>
+
+					<!--Usuario y cerrar sesion-->
+			</ul>
+		</div>
+	</div>
+	<!--Menu-->
+
+
+	<!--Contenido-->
+
+	<!--Social bar-->
+	<div class="social-bar" style="margin-top: 5%;">
+		<a href="https://www.facebook.com/Maderas-Finas-101500835023458/?modal=admin_todo_tour" target="_blank"
+			class="icon icon-facebook"></a>
+		<a href="https://wa.link/2rn9mf" target="_blank" class="icon icon-whatsapp"></a>
+		<a href="https://www.instagram.com/" target="_blank" class="icon icon-instagram"></a>
+	</div>
+	<!--Social bar-->
+
+	<!--Formulario-->
+	<br>
+	<center>
+		<div class="formulario" id="c">
+			<div id="c">
+				<div id="c">
+					<h1>Cotizar</h1>
+						<h5 title="usuario actual" sec:authentication="principal.username" style="text-align:center;"></h5>			
+					<div class="card-body" id="c">
+						<form id="c">
+							<div class="row" id="c">
+								<!--Lista desplegable-->
+								<div class="form-group col-md-6" id="c">
+									<label for="#">Producto:</label><br>
+									<select id="select1" name="#" required class="form-control">
+										<option value="#">Selecciona un producto de su preferencia </option>
+										<option value="3000000">Sala en L</option>
+										<option value="4500000">Sala en con dos sofas</option>
+										<option value="5200000">Sala en con tres sofas</option>
+										<option value="5000000">Comedor tapa en vidrio</option>
+										<option value="4000000">Comedor tapa en madera</option>
+										<option value="4500000">Alcoba</option>
+										<option value="7000000">Closet macizo</option>
+										<option value="5000000">Closet tamboreado</option>
+									</select>
+								</div>
+								<br>
+								<!--Lista desplegable-->
+
+								<!--Diseno Producto-->
+
+								<div class="form-group col-md-6" id="c">
+									<label for="#">Diseño:</label><br>
+									<select id="dise" name="#" required class="form-control">
+										<option value="#">Selecciona un diseño</option>
+										<option value="#">Clásico</option>
+										<option value="#">Moderno</option>
+										<option value="#">Deko</option>
+										<option value="#">Rustico</option>
+									</select>
+								</div>
+							</div>
+							<br>
+							<!--Diseno Producto-->
+
+							<!--Tipo tela-->
+							<div class="row" id="c">
+								<div class="form-group col-md-6" id="c">
+									<label for="#" title="Solo si aplica">Tipo de tela:</label>
+									<select id="select2" name="#" title="Solo si aplica" class="form-control">
+										<options value="#">Selecciona un tipo de tela (si aplica)</option>
+										<option value="100000">Lino</option>
+										<option value="225000">Prana</option>
+										<option value="100000">Cuero</option>
+										<option value="150000">Cuerina</option>
+										<option value="250000">Terciopelo</option>
+										<option value="200000">Bravia</option>
+									</select>
+								</div>
+								<br>
+								<!--Tipo tela-->
+
+								<!--Color Tela-->
+								<div class="form-group col-md-6" id="c">
+									<label for="#" title="Solo si aplica">Color Tela:</label><br>
+									<input id="colort" type="color" title="Solo si aplica" class="form-control"><br><br>
+
+
+								</div>
+							</div>
+							<!--Color Tela-->
+
+							<!--Tipo Madera-->
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="#">Tipo de madera:</label>
+									<select id="select3" name="#" required class="form-control">
+										<option value="#">Selecciona un tipo de madera</option>
+										<option value="175000">Cedro</option>
+										<option value="200000">Flor morado</option>
+										<option value="150000">Nogal</option>
+									</select>
+								</div>
+								<br>
+								<!--Tipo Madera-->
+
+								<!--Color Madera-->
+								<div class="form-group col-md-6">
+									<label for="#">Color madera:</label><br>
+									<select id="colorm" name="#" required class="form-control">
+										<option value="#">Selecciona un color</option>
+										<option value="#">Miel</option>
+										<option value="#">Wengue</option>
+										<option value="#">Blanco</option>
+										<option value="#">Gris</option>
+										<option value="#">Caramelo</option>
+										<option value="#">Cedro</option>
+										<option value="#">Natural</option>
+									</select>
+								</div>
+							</div>
+
+							<br>
+							<!--Color Madera-->
+
+							<!--Cantidad-->
+							<div id="c">
+								<label for="#">Cantidad:</label><br>
+								<input type="text" id="cant" th:onkeypress="return SoloNumeros(event);"
+									placeholder="Cantidad de productos" class="form-control"><br><br>
+							</div>
+							<!--Cantidad-->
+
+							<!--Resultado-->
+							<div id="c">
+							<h4>Valor cotización:</h4>
+							<textarea readonly id="result" placeholder="COP $"
+								style="text-align: center;font-size: 30px;height: 60px;"
+								class="form-control"></textarea>
+							</div>
+							<!--Resultado-->
+
+
+							<!--Botones-->
+							<div>
+								<input type="button" class="btn btn-success" onclick="valor()" value="Generar precio"
+									title="Precio de la cotización"></input>
+
+								<a onclick="expo()">
+									<button type="button" class="btn btn-success" title="Crear cotización"><i
+											class="fa-solid fa-file-arrow-down"></i></button></a>
+
+							</div>
+							<!--Botones-->
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</center>
+
+
+	<!--Formulario-->
+
+
+	<!--Contenido-->
+
+
+	<!--footer-->
+
+	<footer style="margin-top: -15%;">
+		<div class="footer-content">
+			<h3 style="color: black;">El Cedro</h3>
+			<p>El Cedro es un sistema de información encargado de la gestión de ventas, inventario y
+				producción de la empresa Madera Finas.
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com/Maderas-Finas-101500835023458/?modal=admin_todo_tour"><i
+							class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></i></a></li>
+				<li><a href="https://wa.link/2rn9mf"><i class="fa-brands fa-whatsapp"></i></a></li>
+				<li><a href="https://www.youtube.com/channel/UC9bGWjljEqoiyDs4LK2I0lw"><i class="fa fa-youtube"></i></a>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2022 El Cedro </p>
+			<div class="footer-menu">
+				<ul class="f-menu">
+					<li><a href="index">Inicio</a></li>
+					<li style="cursor: pointer;"><a onclick="mensaje()">Contactanos</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--footer-->
+
+
+
+</body>
+
+</html>
