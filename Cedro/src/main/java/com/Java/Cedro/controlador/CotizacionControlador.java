@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.Java.Cedro.Servicio.CotizacionServicio;
 import com.Java.Cedro.Servicio.EstadocServicio;
-import com.Java.Cedro.Servicio.PedidoServicio;
 import com.Java.Cedro.modelo.Cotizacion;
 import com.Java.Cedro.modelo.Estado_cotizacion;
-import com.Java.Cedro.modelo.Pedido;
+
 
 
 @Controller
@@ -23,8 +22,7 @@ public class CotizacionControlador {
 	@Autowired
 	private CotizacionServicio CServicio;
 	
-	@Autowired
-	private PedidoServicio PeServicio;
+	
 	
 	@Autowired
 	private EstadocServicio Eservicio;
@@ -38,17 +36,16 @@ public class CotizacionControlador {
 	@GetMapping("/cotizaciones/nuevo")
 	public String mostrarFormularioDeRegistrarCotizacion(Model modelo) {
 		
-		List<Pedido> lstPe = PeServicio.listarTodosLospedidos();
-		modelo.addAttribute("lstPe", lstPe);
+		
 		
 		List<Estado_cotizacion> lstEc = Eservicio.listarTodosLosEstado();
 		modelo.addAttribute("lstEc", lstEc);
 		
 		
-		Cotizacion cotizacion = new Cotizacion();
+		//Cotizacion cotizacion = new Cotizacion();
 
 		
-		modelo.addAttribute("cotizaciones", cotizacion);
+		//modelo.addAttribute("cotizaciones", cotizacion);
 		return "CotizacionCRUD/Crear_Cotizacion";
 	}
 	
@@ -62,8 +59,7 @@ public class CotizacionControlador {
 	@GetMapping("/cotizaciones/editar/{id}")
 	public String mostrarFormularioDeEditar(@PathVariable Integer id, Model modelo) {
 
-		List<Pedido> lstPe = PeServicio.listarTodosLospedidos();
-		modelo.addAttribute("lstPe", lstPe);
+		
 
 		modelo.addAttribute("cotizaciones", CServicio.obtenerCotizacionPorId(id));
 		return "CotizacionCRUD/Editar_Cotizacion";

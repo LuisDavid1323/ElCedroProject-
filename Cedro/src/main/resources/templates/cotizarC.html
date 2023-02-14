@@ -64,11 +64,11 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jsPDF/dist/jspdf.min.js"></script>
 
-	/*Exportar*/
+	/Exportar/
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
 	<script src="/js/Exportar TABLE.js"></script>
 	<script src="/js/html2pdf.bundle.js"></script>
-	/*Exportar*/
+	/Exportar/
 
 	<!--JavaScript-->
 
@@ -177,133 +177,141 @@
 			<div id="c">
 				<div id="c">
 					<h1>Cotizar</h1>
-						<h5 title="usuario actual" sec:authentication="principal.username" style="text-align:center;"></h5>			
+					<h5 title="usuario actual" sec:authentication="principal.username" style="text-align:center;"></h5>
 					<div class="card-body" id="c">
 						<form id="c">
 							<div class="row" id="c">
+
 								<!--Lista desplegable-->
 								<div class="form-group col-md-6" id="c">
 									<label for="#">Producto:</label><br>
-									<select id="select1" name="#" required class="form-control">
-										<option value="#">Selecciona un producto de su preferencia </option>
-										<option value="3000000">Sala en L</option>
-										<option value="4500000">Sala en con dos sofas</option>
-										<option value="5200000">Sala en con tres sofas</option>
-										<option value="5000000">Comedor tapa en vidrio</option>
-										<option value="4000000">Comedor tapa en madera</option>
-										<option value="4500000">Alcoba</option>
-										<option value="7000000">Closet macizo</option>
-										<option value="5000000">Closet tamboreado</option>
-									</select>
+
+
+							
+										<table>
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Nombre</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="producto : ${productos}">
+													<td th:text="${producto.id_producto}"></td>
+													<td th:text="${producto.nombre_producto}"></td>
+												</tr>
+											</tbody>
+										</table>
+									
+									<br>
+									<!--Lista desplegable-->
+
+									<!--Diseno Producto-->
+
+									<div class="form-group col-md-6" id="c">
+										<label for="#">Diseño:</label><br>
+										<select id="dise" name="#" required class="form-control">
+											<option value="#">Selecciona un diseño</option>
+											<option value="#">Clásico</option>
+											<option value="#">Moderno</option>
+											<option value="#">Deko</option>
+											<option value="#">Rustico</option>
+										</select>
+									</div>
 								</div>
 								<br>
-								<!--Lista desplegable-->
-
 								<!--Diseno Producto-->
 
-								<div class="form-group col-md-6" id="c">
-									<label for="#">Diseño:</label><br>
-									<select id="dise" name="#" required class="form-control">
-										<option value="#">Selecciona un diseño</option>
-										<option value="#">Clásico</option>
-										<option value="#">Moderno</option>
-										<option value="#">Deko</option>
-										<option value="#">Rustico</option>
-									</select>
-								</div>
-							</div>
-							<br>
-							<!--Diseno Producto-->
-
-							<!--Tipo tela-->
-							<div class="row" id="c">
-								<div class="form-group col-md-6" id="c">
-									<label for="#" title="Solo si aplica">Tipo de tela:</label>
-									<select id="select2" name="#" title="Solo si aplica" class="form-control">
-										<options value="#">Selecciona un tipo de tela (si aplica)</option>
-										<option value="100000">Lino</option>
-										<option value="225000">Prana</option>
-										<option value="100000">Cuero</option>
-										<option value="150000">Cuerina</option>
-										<option value="250000">Terciopelo</option>
-										<option value="200000">Bravia</option>
-									</select>
-								</div>
-								<br>
 								<!--Tipo tela-->
+								<div class="row" id="c">
+									<div class="form-group col-md-6" id="c">
+										<label for="#" title="Solo si aplica">Tipo de tela:</label>
+										<select id="select2" name="#" title="Solo si aplica" class="form-control">
+											<options value="#">Selecciona un tipo de tela (si aplica)</option>
+												<option value="100000">Lino</option>
+												<option value="225000">Prana</option>
+												<option value="100000">Cuero</option>
+												<option value="150000">Cuerina</option>
+												<option value="250000">Terciopelo</option>
+												<option value="200000">Bravia</option>
+										</select>
+									</div>
+									<br>
+									<!--Tipo tela-->
 
+									<!--Color Tela-->
+									<div class="form-group col-md-6" id="c">
+										<label for="#" title="Solo si aplica">Color Tela:</label><br>
+										<input id="colort" type="color" title="Solo si aplica"
+											class="form-control"><br><br>
+
+
+									</div>
+								</div>
 								<!--Color Tela-->
-								<div class="form-group col-md-6" id="c">
-									<label for="#" title="Solo si aplica">Color Tela:</label><br>
-									<input id="colort" type="color" title="Solo si aplica" class="form-control"><br><br>
 
-
-								</div>
-							</div>
-							<!--Color Tela-->
-
-							<!--Tipo Madera-->
-							<div class="row">
-								<div class="form-group col-md-6">
-									<label for="#">Tipo de madera:</label>
-									<select id="select3" name="#" required class="form-control">
-										<option value="#">Selecciona un tipo de madera</option>
-										<option value="175000">Cedro</option>
-										<option value="200000">Flor morado</option>
-										<option value="150000">Nogal</option>
-									</select>
-								</div>
-								<br>
 								<!--Tipo Madera-->
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="#">Tipo de madera:</label>
+										<select id="select3" name="#" required class="form-control">
+											<option value="#">Selecciona un tipo de madera</option>
+											<option value="175000">Cedro</option>
+											<option value="200000">Flor morado</option>
+											<option value="150000">Nogal</option>
+										</select>
+									</div>
+									<br>
+									<!--Tipo Madera-->
 
-								<!--Color Madera-->
-								<div class="form-group col-md-6">
-									<label for="#">Color madera:</label><br>
-									<select id="colorm" name="#" required class="form-control">
-										<option value="#">Selecciona un color</option>
-										<option value="#">Miel</option>
-										<option value="#">Wengue</option>
-										<option value="#">Blanco</option>
-										<option value="#">Gris</option>
-										<option value="#">Caramelo</option>
-										<option value="#">Cedro</option>
-										<option value="#">Natural</option>
-									</select>
+									<!--Color Madera-->
+									<div class="form-group col-md-6">
+										<label for="#">Color madera:</label><br>
+										<select id="colorm" name="#" required class="form-control">
+											<option value="#">Selecciona un color</option>
+											<option value="#">Miel</option>
+											<option value="#">Wengue</option>
+											<option value="#">Blanco</option>
+											<option value="#">Gris</option>
+											<option value="#">Caramelo</option>
+											<option value="#">Cedro</option>
+											<option value="#">Natural</option>
+										</select>
+									</div>
 								</div>
-							</div>
 
-							<br>
-							<!--Color Madera-->
+								<br>
+								<!--Color Madera-->
 
-							<!--Cantidad-->
-							<div id="c">
-								<label for="#">Cantidad:</label><br>
-								<input type="text" id="cant" th:onkeypress="return SoloNumeros(event);"
-									placeholder="Cantidad de productos" class="form-control"><br><br>
-							</div>
-							<!--Cantidad-->
+								<!--Cantidad-->
+								<div id="c">
+									<label for="#">Cantidad:</label><br>
+									<input type="text" id="cant" th:onkeypress="return SoloNumeros(event);"
+										placeholder="Cantidad de productos" class="form-control"><br><br>
+								</div>
+								<!--Cantidad-->
 
-							<!--Resultado-->
-							<div id="c">
-							<h4>Valor cotización:</h4>
-							<textarea readonly id="result" placeholder="COP $"
-								style="text-align: center;font-size: 30px;height: 60px;"
-								class="form-control"></textarea>
-							</div>
-							<!--Resultado-->
+								<!--Resultado-->
+								<div id="c">
+									<h4>Valor cotización:</h4>
+									<textarea readonly id="result" placeholder="COP $"
+										style="text-align: center;font-size: 30px;height: 60px;"
+										class="form-control"></textarea>
+								</div>
+								<!--Resultado-->
 
 
-							<!--Botones-->
-							<div>
-								<input type="button" class="btn btn-success" onclick="valor()" value="Generar precio"
-									title="Precio de la cotización"></input>
+								<!--Botones-->
+								<div>
+									<input type="button" class="btn btn-success" onclick="valor()"
+										value="Generar precio" title="Precio de la cotización"></input>
 
-								<a onclick="expo()">
-									<button type="button" class="btn btn-success" title="Crear cotización"><i
-											class="fa-solid fa-file-arrow-down"></i></button></a>
+									<a onclick="expo()">
+										<button type="button" class="btn btn-success" title="Crear cotización"><i
+												class="fa-solid fa-file-arrow-down"></i></button></a>
 
-							</div>
-							<!--Botones-->
+								</div>
+								<!--Botones-->
 
 						</form>
 					</div>

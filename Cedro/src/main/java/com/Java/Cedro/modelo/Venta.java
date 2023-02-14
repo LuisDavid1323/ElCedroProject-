@@ -42,8 +42,6 @@ public class Venta implements Serializable{
 	@Column(name="Valor_Unitario")
 	private String Valor_unitario;
 	
-	
-	
 
 	/*Ventas___Vendedor*/
 	@ManyToOne
@@ -52,10 +50,7 @@ public class Venta implements Serializable{
 	
 	
 	
-	/*Ventas___Pedido*/
-	@ManyToOne
-	@JoinColumn(name="id_pedido_fk", referencedColumnName = "id_pedido")
-	private Pedido id_pedido_fk;
+	
 	
 
 	
@@ -125,16 +120,6 @@ public class Venta implements Serializable{
 	}
 
 
-
-	public Pedido getId_pedido_fk() {
-		return id_pedido_fk;
-	}
-
-
-
-	public void setId_pedido_fk(Pedido id_pedido_fk) {
-		this.id_pedido_fk = id_pedido_fk;
-	}
 
 
 

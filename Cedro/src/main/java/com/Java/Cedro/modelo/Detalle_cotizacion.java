@@ -33,10 +33,10 @@ public class Detalle_cotizacion implements Serializable{
 	
 	/*DetalleC_Cotizacion*/
 	@OneToMany(mappedBy ="id_detalle_cotizacion_fk")
-    private List <Cotizacion>ListCotizacion;
+    private List<Cotizacion> ListCotizacion;
 	
 	@Column(name="Cantidad")
-	private  Integer Cantidad;
+	private Integer Cantidad;
 	
 	/*DetalleC_Producto*/
 	@ManyToOne
@@ -68,6 +68,7 @@ public class Detalle_cotizacion implements Serializable{
 
 
 	//Getters and Setters
+	
 	
 	public Integer getId_detalle_cotizacion() {
 		return id_detalle_cotizacion;
@@ -180,12 +181,23 @@ public class Detalle_cotizacion implements Serializable{
 	public void setId_diseño_fk(Diseño id_diseno_fk) {
 		this.id_diseno_fk = id_diseno_fk;
 	}
-	
-	
-	
-	
-	
-	
-	
 
+
+	/*Constructor*/
+	public Detalle_cotizacion() {
+		super();
+		this.id_detalle_cotizacion = id_detalle_cotizacion;
+		ListCotizacion = getListCotizacion();
+		Cantidad = getCantidad();
+		this.id_producto_fk = id_producto_fk;
+		this.id_tela_fk = id_tela_fk;
+		this.id_maderas_fk = id_maderas_fk;
+		this.id_Categoria_producto_fk = id_Categoria_producto_fk;
+		this.id_diseno_fk = id_diseno_fk;
+	}
+
+
+	
+	
+	
 }

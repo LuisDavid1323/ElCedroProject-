@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.Java.Cedro.DTO.DetalleCotizacionDTO;
 import com.Java.Cedro.Servicio.CProductoServicio;
-import com.Java.Cedro.Servicio.DetalleCotiServicio;
+import com.Java.Cedro.Servicio.DetalleCotizacionServicio;
 import com.Java.Cedro.Servicio.DiseñoServicio;
 import com.Java.Cedro.Servicio.MaderaServicio;
 import com.Java.Cedro.Servicio.ProductoServicio;
@@ -25,7 +26,7 @@ import com.Java.Cedro.modelo.Tela;
 public class DetalleCotiControlador {
 
 	@Autowired
-	private DetalleCotiServicio DCservicio;
+	private DetalleCotizacionServicio DCservicio;
 	
 	@Autowired
 	private TelaServicio TServicio;
@@ -44,7 +45,7 @@ public class DetalleCotiControlador {
 	
 	@GetMapping({ "/DetalleCo"})
 	public String listarDetalleCo(Model modelo) {
-		modelo.addAttribute("DetalleCo", DCservicio.listarTodasLosDetalles_cotizacion());
+		modelo.addAttribute("DetalleCo", DCservicio.listarTodosLosDetalle());
 		return "DetalleCoCRUD/DetalleCo";
 	}  
 	
@@ -75,8 +76,8 @@ public class DetalleCotiControlador {
 	}
 	
 	@PostMapping("/DetalleCo")
-	public String guardarDetalleCo(@ModelAttribute("DetalleCo") Detalle_cotizacion Detalle_cotizacion) {
-		DCservicio.guardarDetalle_cotizacion(Detalle_cotizacion);
+	public String guardarDetalleCo(@ModelAttribute("DetalleCo") DetalleCotizacionDTO Detalle_cotizacion) {
+		DCservicio.guardarDetalle(Detalle_cotizacion);
 		return "redirect:/DetalleCo";
 	}
 	
@@ -98,31 +99,20 @@ public class DetalleCotiControlador {
 		List<Diseño> lstD = DServicio.listarTodosLosDiseños();
 		modelo.addAttribute("lstD", lstD);
 
-		modelo.addAttribute("DetalleCo", DCservicio.obtenerDetalle_cotizacionPorId(id) );
+		modelo.addAttribute("DetalleCo", DCservicio.obtenerDetallePorId(id) );
 		return "DetalleCoCRUD/Editar_EditarDetalleCo";
 	}
 	
 	@PostMapping("/DetalleCo/{id}")
-	public String actualizarDetalleCo(@PathVariable Integer id, @ModelAttribute("DetalleCo") Detalle_cotizacion Detalle_cotizacion, Model modelo) {
-
-		Detalle_cotizacion Dc = DCservicio.obtenerDetalle_cotizacionPorId(id);
+	public String actualizarDetalleCo(@PathVariable Integer id, @ModelAttribute("DetalleCo") DetalleCotizacionDTO Detalle_cotizacion, Model modelo) {
 		
-		Dc.setId_detalle_cotizacion(id);
-		Dc.setCantidad(Detalle_cotizacion.getCantidad());
-		Dc.setId_producto_fk(Detalle_cotizacion.getId_producto_fk());
-		Dc.setId_diseno_fk(Detalle_cotizacion.getId_diseno_fk());
-		Dc.setId_maderas_fk(Detalle_cotizacion.getId_maderas_fk());
-		Dc.setId_Categoria_producto_fk(Detalle_cotizacion.getId_Categoria_producto_fk());
-		Dc.setId_tela_fk(Detalle_cotizacion.getId_tela_fk());
-		
-		
-		DCservicio.actualizarDetalle_cotizacion(Dc);
+		DCservicio.actualizarDetalle(id, Detalle_cotizacion);
 		return "redirect:/DetalleCo";
 	}
 	
 	@GetMapping("/DetalleCo/{id}")
 	public String eliminarDetalleCo(@PathVariable Integer id) {
-		DCservicio.eliminarDetalle_cotizacion(id);
+		DCservicio.eliminarDetalle(id);
 		return "redirect:/DetalleCo";
 	}
 }

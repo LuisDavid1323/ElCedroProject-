@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/IMG/**",
 				"/login**").permitAll()
 		.antMatchers().hasRole("Cliente")
+		.antMatchers("/cotizaciones/nuevo**").hasAuthority("Administrador")
 		.antMatchers("/administradores/**").hasAuthority("Administrador")
 		.antMatchers("/dashboardP/**").hasAuthority("Jefe de produccion")
 		.antMatchers("/dashboardV/**").hasAuthority("Vendedor")
@@ -58,6 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.formLogin()
 		.loginPage("/login")
 		.permitAll()
+		
+		.loginPage("/productos")
+		.permitAll()
+		
 		.and()
 		.logout()
 		.invalidateHttpSession(true)

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Java.Cedro.DTO.CotizacionDTO;
 import com.Java.Cedro.Servicio.CotizacionServicio;
 import com.Java.Cedro.modelo.Cotizacion;
 import com.Java.Cedro.repositorio.CotizacionRepositorio;
@@ -43,4 +44,10 @@ public class CotizacionServicioImpl implements CotizacionServicio{
 		
 	}
 
+	@Override
+	public CotizacionDTO guardarCotizacionDTO(CotizacionDTO cotidto) {
+		Cotizacion coti = new Cotizacion(cotidto.getId_detalle_cotizacion_fk());
+		return null;
+	}
+	
 }

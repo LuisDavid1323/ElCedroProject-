@@ -4,8 +4,6 @@ import java.util.List;
 import com.Java.Cedro.modelo.Categoria_Insumo;
 
 
-
-
 public interface CInsumoServicio {
 
 	public List<Categoria_Insumo> listarTodosCInsumo();
