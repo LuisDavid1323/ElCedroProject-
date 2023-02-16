@@ -38,6 +38,12 @@ public class Detalle_cotizacion implements Serializable{
 	@Column(name="Cantidad")
 	private Integer Cantidad;
 	
+	@Column
+	private String Color_Madera;
+	
+	@Column
+	private String Color_Tela;
+	
 	/*DetalleC_Producto*/
 	@ManyToOne
 	@JoinColumn(name="id_producto_fk", referencedColumnName = "id_producto")
@@ -63,8 +69,8 @@ public class Detalle_cotizacion implements Serializable{
 	
 	/*DetalleC_Diseno*/
 	@ManyToOne
-	@JoinColumn(name="id_diseno_fk", referencedColumnName = "id_diseño")
-	private Diseño id_diseno_fk;
+	@JoinColumn(name="id_diseno_fk", referencedColumnName = "id_diseno")
+	private Diseno id_diseno_fk;
 
 
 	//Getters and Setters
@@ -112,13 +118,13 @@ public class Detalle_cotizacion implements Serializable{
 
 
 
-	public Diseño getId_diseno_fk() {
+	public Diseno getId_diseno_fk() {
 		return id_diseno_fk;
 	}
 
 
 
-	public void setId_diseno_fk(Diseño id_diseno_fk) {
+	public void setId_diseno_fk(Diseno id_diseno_fk) {
 		this.id_diseno_fk = id_diseno_fk;
 	}
 
@@ -172,15 +178,41 @@ public class Detalle_cotizacion implements Serializable{
 
 
 
-	public Diseño getId_diseño_fk() {
+	public Diseno getId_diseño_fk() {
 		return id_diseno_fk;
 	}
 
 
 
-	public void setId_diseño_fk(Diseño id_diseno_fk) {
+	public void setId_diseño_fk(Diseno id_diseno_fk) {
 		this.id_diseno_fk = id_diseno_fk;
 	}
+	
+	
+
+
+	public String getColor_Madera() {
+		return Color_Madera;
+	}
+
+
+
+	public void setColor_Madera(String color_Madera) {
+		Color_Madera = color_Madera;
+	}
+
+
+
+	public String getColor_Tela() {
+		return Color_Tela;
+	}
+
+
+
+	public void setColor_Tela(String color_Tela) {
+		Color_Tela = color_Tela;
+	}
+
 
 
 	/*Constructor*/
@@ -194,6 +226,8 @@ public class Detalle_cotizacion implements Serializable{
 		this.id_maderas_fk = id_maderas_fk;
 		this.id_Categoria_producto_fk = id_Categoria_producto_fk;
 		this.id_diseno_fk = id_diseno_fk;
+		this.Color_Madera = Color_Madera; 
+		this.Color_Tela =  Color_Tela;
 	}
 
 

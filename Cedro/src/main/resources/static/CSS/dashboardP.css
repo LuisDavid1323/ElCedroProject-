@@ -203,7 +203,7 @@ h1{
 /* footer */
 
 
-footer{
+	footer{
 	
     
     bottom: 0;
@@ -264,7 +264,7 @@ footer{
 
 }
 .socials a:hover i{
-    color: aqua;
+    color: rgb(143, 92, 54);
 }
 
 .footer-bottom{
@@ -306,7 +306,7 @@ display: block;
   text-decoration: none;
 }
 .footer-menu ul li a:hover{
-  color: #27bcda;
+  color: rgb(143, 92, 54);
 }
       
 @media (max-width:500px) {

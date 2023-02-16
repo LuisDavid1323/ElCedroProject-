@@ -1,6 +1,8 @@
 package com.Java.Cedro.controlador;
 
 import java.util.List;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.Java.Cedro.DTO.DetalleCotizacionDTO;
 import com.Java.Cedro.Servicio.CProductoServicio;
 import com.Java.Cedro.Servicio.DetalleCotizacionServicio;
-import com.Java.Cedro.Servicio.DiseñoServicio;
+import com.Java.Cedro.Servicio.DisenoServicio;
 import com.Java.Cedro.Servicio.MaderaServicio;
 import com.Java.Cedro.Servicio.ProductoServicio;
 import com.Java.Cedro.Servicio.TelaServicio;
 import com.Java.Cedro.modelo.Categoria_producto;
 import com.Java.Cedro.modelo.Detalle_cotizacion;
-import com.Java.Cedro.modelo.Diseño;
+import com.Java.Cedro.modelo.Diseno;
 import com.Java.Cedro.modelo.Madera;
 import com.Java.Cedro.modelo.Producto;
 import com.Java.Cedro.modelo.Tela;
@@ -35,7 +41,7 @@ public class DetalleCotiControlador {
 	private MaderaServicio MServicio;
 	
 	@Autowired
-	private DiseñoServicio DServicio;
+	private DisenoServicio DServicio;
 	
 	@Autowired
 	private ProductoServicio PServicio;
@@ -64,7 +70,7 @@ public class DetalleCotiControlador {
 		List<Categoria_producto> lstCp = CPServicio.listarTodasLasCProducto();
 		modelo.addAttribute("lstCp", lstCp);
 		
-		List<Diseño> lstD = DServicio.listarTodosLosDiseños();
+		List<Diseno> lstD = DServicio.listarTodosLosDisenos();
 		modelo.addAttribute("lstD", lstD);
 		
 		
@@ -75,11 +81,16 @@ public class DetalleCotiControlador {
 		return "Crear_DetalleCo";
 	}
 	
-	@PostMapping("/DetalleCo")
-	public String guardarDetalleCo(@ModelAttribute("DetalleCo") DetalleCotizacionDTO Detalle_cotizacion) {
-		DCservicio.guardarDetalle(Detalle_cotizacion);
+	@RequestMapping(value="DetalleCo", method=RequestMethod.POST)
+	public String guardarDetalleCo(@ModelAttribute DetalleCotizacionDTO detalleCotizacion) {
+		System.out.println("Cantidad: " + detalleCotizacion.getCantidad());
+	
+		DCservicio.guardarDetalle(detalleCotizacion);
 		return "redirect:/DetalleCo";
 	}
+	
+	
+	
 	
 	@GetMapping("/DetalleCo/editar/{id}")
 	public String mostrarFormularioDeEditar(@PathVariable Integer id, Model modelo) {
@@ -96,14 +107,14 @@ public class DetalleCotiControlador {
 		List<Categoria_producto> lstCp = CPServicio.listarTodasLasCProducto();
 		modelo.addAttribute("lstCp", lstCp);
 		
-		List<Diseño> lstD = DServicio.listarTodosLosDiseños();
+		List<Diseno> lstD = DServicio.listarTodosLosDisenos();
 		modelo.addAttribute("lstD", lstD);
 
 		modelo.addAttribute("DetalleCo", DCservicio.obtenerDetallePorId(id) );
 		return "DetalleCoCRUD/Editar_EditarDetalleCo";
 	}
 	
-	@PostMapping("/DetalleCo/{id}")
+	@PutMapping("/DetalleCo/{id}")
 	public String actualizarDetalleCo(@PathVariable Integer id, @ModelAttribute("DetalleCo") DetalleCotizacionDTO Detalle_cotizacion, Model modelo) {
 		
 		DCservicio.actualizarDetalle(id, Detalle_cotizacion);

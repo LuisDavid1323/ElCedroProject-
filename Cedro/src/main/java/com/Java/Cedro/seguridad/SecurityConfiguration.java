@@ -59,10 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.formLogin()
 		.loginPage("/login")
 		.permitAll()
-		
-		.loginPage("/productos")
-		.permitAll()
-		
 		.and()
 		.logout()
 		.invalidateHttpSession(true)

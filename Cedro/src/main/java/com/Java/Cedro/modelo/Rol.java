@@ -17,7 +17,6 @@ public class Rol {
 
 	//Getters and Setters
 	
-	
 	public Long getId() {
 		return id_rol;
 	}

@@ -113,7 +113,10 @@ public class Cotizacion implements Serializable{
 		this.id_detalle_cotizacion_fk = id_detalle_cotizacion_fk;
 	}
 
-
+	
+	public Cotizacion(){
+		
+	}
 	
 
 	

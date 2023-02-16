@@ -1,20 +1,23 @@
 package com.Java.Cedro.servicioImpl;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.Java.Cedro.DTO.DetalleCotizacionDTO;
 import com.Java.Cedro.Servicio.DetalleCotizacionServicio;
 import com.Java.Cedro.modelo.Categoria_producto;
+import com.Java.Cedro.modelo.Cotizacion;
 import com.Java.Cedro.modelo.Detalle_cotizacion;
-import com.Java.Cedro.modelo.Diseño;
+import com.Java.Cedro.modelo.Diseno;
 import com.Java.Cedro.modelo.Madera;
 import com.Java.Cedro.modelo.Producto;
 import com.Java.Cedro.modelo.Tela;
 import com.Java.Cedro.repositorio.CProductoRepositorio;
 import com.Java.Cedro.repositorio.CotizacionRepositorio;
 import com.Java.Cedro.repositorio.DetalleCotizacionRepositorio;
-import com.Java.Cedro.repositorio.DiseñoRepositorio;
+import com.Java.Cedro.repositorio.DisenoRepositorio;
 import com.Java.Cedro.repositorio.MaderaRepositorio;
 import com.Java.Cedro.repositorio.ProductoRepositorio;
 import com.Java.Cedro.repositorio.TelaRepositorio;
@@ -38,11 +41,13 @@ public class DetalleCotizacionServicioImpl implements DetalleCotizacionServicio{
 	private MaderaRepositorio maderaRepositorio;
 	
 	@Autowired
-	private DiseñoRepositorio disenoRepositorio;
+	private DisenoRepositorio disenoRepositorio;
 	
 	@Autowired
 	private CProductoRepositorio categoriaRepositorio;
-
+	
+	
+	
 	@Override
 	public List<Detalle_cotizacion> listarTodosLosDetalle() {
 		return detalleCotizacionRepositorio.findAll();
@@ -60,7 +65,7 @@ public class DetalleCotizacionServicioImpl implements DetalleCotizacionServicio{
 		Tela telaDb = this.telaRepositorio.findById(detalleDto.getId_tela_fk()).orElse(null);
 		Madera maderaDb = this.maderaRepositorio.findById(detalleDto.getId_maderas_fk()).orElse(null);
 		Categoria_producto cProductoDb = this.categoriaRepositorio.findById(detalleDto.getId_Categoria_producto_fk()).orElse(null);   
-		Diseño disenoDb = this.disenoRepositorio.findById(detalleDto.getId_diseno_fk()).orElse(null);
+		Diseno disenoDb = this.disenoRepositorio.findById(detalleDto.getId_diseno_fk()).orElse(null);
 		Detalle_cotizacion detalleCotizacionDb = this.detalleCotizacionRepositorio.findById(id).orElse(null);
 		
 		detalleCotizacionDb.setId_producto_fk(productoDb);
@@ -84,7 +89,7 @@ public class DetalleCotizacionServicioImpl implements DetalleCotizacionServicio{
 		Tela telaDb = this.telaRepositorio.findById(detalleDto.getId_tela_fk()).orElse(null);
 		Madera maderaDb = this.maderaRepositorio.findById(detalleDto.getId_maderas_fk()).orElse(null);
 		Categoria_producto cProductoDb = this.categoriaRepositorio.findById(detalleDto.getId_Categoria_producto_fk()).orElse(null);   
-		Diseño disenoDb = this.disenoRepositorio.findById(detalleDto.getId_diseno_fk()).orElse(null);
+		Diseno disenoDb = this.disenoRepositorio.findById(detalleDto.getId_diseno_fk()).orElse(null);
 		
 		Detalle_cotizacion Dcoti = new Detalle_cotizacion();
 		Dcoti.setId_producto_fk(productoDb);
@@ -93,9 +98,25 @@ public class DetalleCotizacionServicioImpl implements DetalleCotizacionServicio{
 		Dcoti.setId_Categoria_producto_fk(cProductoDb);
 		Dcoti.setId_diseño_fk(disenoDb);
 		Dcoti.setCantidad(detalleDto.getCantidad());
+		//Dcoti.setTotal(calcularValor(productoDB.getPrecioProducto(),telaDB.get );
+		//Todos los precios tipo Double
+		Detalle_cotizacion saved = this.detalleCotizacionRepositorio.save(Dcoti);
+		//Crear la cotizacion
+		Cotizacion cotizacion = new Cotizacion();
+		
+		cotizacion.setFecha(new Date().toString());
+		cotizacion.setId_detalle_cotizacion_fk(saved);
 		
 		
-		return this.detalleCotizacionRepositorio.save(Dcoti);
+		
+		return saved;
+	}
+	
+	private Double calcularValor(BigInteger precioProducto) {
+		
+		
+		
+		return 0.0;
 	}
 
 }

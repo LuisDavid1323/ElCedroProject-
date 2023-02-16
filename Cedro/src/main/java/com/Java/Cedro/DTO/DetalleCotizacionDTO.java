@@ -12,6 +12,8 @@ public class DetalleCotizacionDTO {
 	private Integer id_maderas_fk;
 	private Integer id_Categoria_producto_fk;
 	private Integer id_diseno_fk;
+	private String  Color_Madera;
+	private String  Color_Tela;
 	
 	/*Constructor*/
 	
@@ -89,9 +91,35 @@ public class DetalleCotizacionDTO {
 	public void setId_diseno_fk(Integer id_diseno_fk) {
 		this.id_diseno_fk = id_diseno_fk;
 	}
+
+
+
+	public String getColor_Madera() {
+		return Color_Madera;
+	}
+
+
+
+	public void setColor_Madera(String color_Madera) {
+		Color_Madera = color_Madera;
+	}
+
+
+
+	public String getColor_Tela() {
+		return Color_Tela;
+	}
+
+
+
+	public void setColor_Tela(String color_Tela) {
+		Color_Tela = color_Tela;
+	}
 	
 	
-	
+	public DetalleCotizacionDTO() {
+		
+	}
 	
 	
 }

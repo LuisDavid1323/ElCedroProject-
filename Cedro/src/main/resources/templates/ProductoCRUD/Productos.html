@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Lista de ordenes de procucción</title>
+	<title>Productos</title>
 	<!-- CSS y Bootstrap -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="OrdenpCSS/Ordenp.css">
+	<link rel="stylesheet" href="ProductosCSS/Productos.css">
 	<link rel="stylesheet" href="CSS/Slide - Menú.css">
 	<!-- CSS y Bootstrap -->
 
@@ -30,7 +30,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="/js/dataTables.js"></script>
 
-	<script src="/OrdenpCSS/Alert.js"></script>
+	<script src="/ProductosCSS/Alert.js"></script>
 	<script src="/js/Slide - menú.js"></script>
 
 	/*Exportar*/
@@ -68,11 +68,11 @@
 			<!--Tabla Insumos-->
 			<div class="container">
 
-				<h1>Ordenes de producción</h1>
+				<h1>Productos</h1>
 
 				<div class="row">
 					<div>
-						<a th:href="@{/ordenesp/nuevo}" class="Cs">Nueva Orden</a>
+						<a th:href="@{/productosCRUD/nuevo}" class="Cs">Nuevo producto</a>
 					</div>
 
 					<div class="col-lg-1">
@@ -91,10 +91,10 @@
 				<table class="table table-striped table-bordered" id="usuarios">
 					<thead class="ColorT">
 						<tr>
-							<th>Id orden</th>
-							<th>Id detalle producción</th>
-							<th>Id Venta</th>
-							<th>Fecha</th>
+							<th>Id producto</th>
+							<th>Nombre producto</th>
+							<th>Precio</th>
+							
 
 
 
@@ -102,11 +102,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="o : ${ordenesp}">
-							<td th:text="${o.id_orden_de_produccion}">Id</td>
-							<td th:text="${o.id_detallePro_fk.id_detallePro}">Id detalle producción</td>
-							<td th:text="${o.id_venta_fk.id_ventas}">Id Venta</td>
-							<td th:text="${o.Fecha}">Fecha</td>
+						<tr th:each="p : ${productos}">
+							<td th:text="${p.id_producto}">Id</td>
+							<td th:text="${p.Nombre_producto}">Id detalle producción</td>
+							<td th:text="${p.Precio}">Id Venta</td>
+							
 
 
 
@@ -118,12 +118,12 @@
 
 								<center>
 
-									<a th:href="@{/ordenesp/editar/{id}(id=${o.id_orden_de_produccion})}"
+									<a th:href="@{/ordenesp/editar/{id}(id=${p.id_producto})}"
 										class="btn btn-info">
 										<img src="img/Edit.svg"></a>
 
 
-									<a th:onclick="eliminarOrdenp([[${o.id_orden_de_produccion}]])"
+									<a th:onclick="eliminarOrdenp([[${p.id_producto}]])"
 										class="btn btn-danger">
 										<img src="img/bx-trash-alt.svg"></a>
 
