@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Editar Detalle cotización</title>
+	<!-- CSS y Bootstrap -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/DetalleCoCSS/DetalleCo-Editar.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/table.svg" />
+	<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+	<!--JavaScript-->
+	<script src="/CotizacionCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="#">Inicio</a>
+
+		<a href="/DetalleCo">Detalle Cotización</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+	<!--Formulario-->
+
+	<div class="formulario">
+		<div class="row">
+			<div class="">
+				<h1>Editar cotización</h1>
+				<div>
+					<form th:action="@{/DetalleCo}" th:object="${DetalleCotizacion}" method="POST">
+
+						<div>
+							<label>Cantidad : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Cantidad"
+								th:field="*{Cantidad}" class="form-control" placeholder="Digite la cantidad " required>
+						</div>
+
+						<div>
+							<label>Producto : </label>
+							<select class="form-control" th:field="*{id_producto_fk}" required>
+								<th:block th:each="producto : ${lstP}">
+									<option th:text="${producto.Nombre_producto}" th:value="${producto.id_producto}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Alto : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Alto" th:field="*{Alto}"
+								class="form-control" placeholder="Medida cm " required>
+						</div>
+
+						<div>
+							<label>Ancho : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Ancho"
+								th:field="*{Ancho}" class="form-control" placeholder="Medida cm " required>
+						</div>
+
+						<div>
+							<label>Fondo : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Fondo"
+								th:field="*{Fondo}" class="form-control" placeholder="Medida cm " required>
+						</div>
+
+						<div>
+							<label>Tela : </label>
+							<select class="form-control" th:field="*{id_tela_fk}" required>
+								<th:block th:each="tela : ${lstTe}">
+									<option th:text="${tela.Nombre_tela}" th:value="${tela.id_telas}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label for="#">Color Tela:</label><br>
+							<input name="color_tela" id="colort" type="color" class="form-control"
+								th:field="*{Color_Tela}">
+						</div>
+
+						<div>
+							<label>Madera : </label>
+							<select class="form-control" th:field="*{id_maderas_fk}" required>
+								<th:block th:each="madera : ${lstMa}">
+									<option th:text="${madera.Nombre_madera}" th:value="${madera.Id_maderas}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Tipo de documento : </label>
+							<br>
+							<select class="form-control" aria-label="Default select example" th:field="*{Color_Madera}">
+
+								<option value="Miel">Miel</option>
+								<option value="Wengue">Wengue</option>
+								<option value="Blanco">Blanco</option>
+								<option value="Gris">Gris</option>
+								<option value="Caramelo">Caramelo</option>
+								<option value="Cedro">Cedro</option>
+								<option value="Natural">Natural</option>
+							</select>
+						</div>
+
+						<div>
+							<label>Categoria : </label>
+							<select class="form-control" th:field="*{id_Categoria_producto_fk}" required>
+								<th:block th:each="categoria : ${lstCp}">
+									<option th:text="${categoria.Nombre_categoria}"
+										th:value="${categoria.id_categorias_productos}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Diseño : </label>
+							<select class="form-control" th:field="*{id_diseno_fk}" required>
+								<th:block th:each="diseno : ${lstD}">
+									<option th:text="${diseno.Nombre_d}"
+										th:value="${diseno.id_diseno}">
+									</option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<button type="reset" class="btn btn-success">Limpiar</button>
+						</div>
+						<div>
+							<button th:onclick="guardarCotizacion()" class="btn btn-success">Guardar</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Formulario-->
+
+
+
+
+
+</body>
+
+</html>

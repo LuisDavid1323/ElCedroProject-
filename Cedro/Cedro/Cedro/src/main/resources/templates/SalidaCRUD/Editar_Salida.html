@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Editar Salida</title>
+	<!-- CSS y Bootstrap -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/SalidaCSS/Salida-Editar.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/table.svg" />
+	<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+	<!--JavaScript-->
+	<script src="/SalidaCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="#">Inicio</a>
+		<a href="/salidas">Salidas</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+	<!--Formulario-->
+
+	<div class="formulario">
+		<div class="row">
+			<div class="">
+				<h1>Editar salida</h1>
+				<div>
+					<form th:action="@{/salidas/{id}(id=${salidas.id_salida})}" th:object="${salidas}" method="POST">
+
+						<div>
+							<label>Orden de producción : </label>
+							<select class="form-control" th:field="*{id_orden_pro_fk}" required>
+								<th:block th:each="Orden : ${lstO}">
+									<option th:text="${Orden.id_orden_de_produccion}"
+										th:value="${Orden.id_orden_de_produccion}"></option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Insumo : </label>
+							<select class="form-control" th:field="*{Id_insumo_fk}" required>
+								<th:block th:each="I : ${lstI}">
+									<option th:text="${I.Nombre}" th:value="${I.Id_insumo}"></option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Fecha : </label>
+							<input type="date" name="Fecha" th:field="*{Fecha}" class="form-control" required>
+						</div>
+
+						<div>
+							<label>Cantidad : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Cantidad"
+								th:field="*{Cantidad}" class="form-control"
+								placeholder="Digite la cantidad de la salida " required>
+						</div>
+
+						<br>
+
+						<div>
+							<button th:onclick="guardarsalida()" class="btn btn-success">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Formulario-->
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+function eliminarOrdenp(id_orden_de_produccion) {
+	console.log(id_orden_de_produccion);
+	swal({
+		  title: "¿Esta seguro de Eliminar?",
+		  text: "Una vez eliminado no se prodra restablecer!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((OK) => {
+		  if (OK) {
+			  $.ajax({
+				 url:"/ordenesp/"+id_orden_de_produccion,
+				 success: function(res) {
+					console.log(res);
+				},			
+			  });
+		    swal("Poof! Registro eliminado!", {
+		      icon: "success",
+		    }).then((ok)=>{
+		    	if(ok){
+		    		location.href="/ordenesp";
+		    	}
+		    });
+		  } 
+		});
+}
+
+function guardarOrdenp(){
+	
+	alert("Se han guardado los cambios")
+	
+}
+
+function crearOrdenp(){
+	
+	alert("Se ha creado una nueva orden de producción")
+	
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Registro de Entradas</title>
+	<!-- CSS and Bootstrap -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="/EntradaCSS/Entrada-Crear.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+	<!-- CSS and Bootstrap -->
+
+</head>
+<!-- Logo -->
+<link rel="icon" href="/IMG/table.svg" />
+<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+
+	<!--JavaScript-->
+	<script src="/EntradaCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index">Inicio</a>
+		<a href="/entradas">Entradas</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+
+
+
+
+	<br>
+	<div class="formulario">
+		<div class="row">
+			<div>
+				<h1>Nueva entrada</h1>
+				<div class="card-body">
+					<form th:action="@{/entradas}" th:object="${entradas}" method="POST">
+
+
+						<div>
+							<label>Insumo : </label>
+							<select class="form-control" th:field="*{Id_insumo_fk}" required>
+								<th:block th:each="I : ${lstI}">
+									<option th:text="${I.Nombre}" th:value="${I.Id_insumo}"></option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Cantidad : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Cantidad"
+								th:field="*{Cantidad}" class="form-control"
+								placeholder="Digite la cantidad de entrada " required>
+						</div>
+
+						<div>
+							<label>Fecha : </label>
+							<input type="date" name="Precio" th:field="*{Fecha}" class="form-control" required>
+						</div>
+
+
+
+
+						<div>
+							<button type="reset" class="btn btn-success">Limpiar</button>
+						</div>
+						<div>
+							<button th:onclick="crearentrada()" class="btn btn-success">Guardar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+
+</html>

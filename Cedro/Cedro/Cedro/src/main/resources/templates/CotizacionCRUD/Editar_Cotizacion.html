@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Editar Cotización</title>
+	<!-- CSS y Bootstrap -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/CotizacionCSS/Cotizacion-Editar.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/table.svg" />
+	<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+	<!--JavaScript-->
+	<script src="/CotizacionCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="#">Inicio</a>
+		<a href="/cotizaciones">Cotización</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+	<!--Formulario-->
+
+	<div class="formulario">
+		<div class="row">
+			<div class="">
+				<h1>Editar cotización</h1>
+				<div>
+					<form th:action="@{/cotizaciones/{id}(id=${cotizaciones.id_cotizacion})}"
+						th:object="${cotizaciones}" method="POST">
+
+						<div>
+							<label>Fecha : </label>
+							<input type="date" name="Fecha" th:field="*{fecha}" class="form-control" required>
+						</div>
+
+						<div>
+							<label>Usuario : </label>
+							<select class="form-control" th:field="*{id_Usuarios_fk}" required>
+								<th:block th:each="Usuario : ${lstU}">
+									<option th:text="${Usuario.nombre} + ' ' +${Usuario.apellido}" th:value="${Usuario.id_usuario}"></option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Detalle Cotización : </label>
+							<select class="form-control" th:field="*{id_detalle_cotizacion_fk}" required>
+								<th:block th:each="Detalle : ${lstD}">
+									<option th:text="${Detalle.id_detalle_cotizacion}"
+										th:value="${Detalle.id_detalle_cotizacion}"></option>
+								</th:block>
+							</select>
+						</div>
+
+						<div>
+							<label>Valor Total : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Valor"
+								th:field="*{ValorTotal}" class="form-control"
+								placeholder="Digite el valor total de la cotización" required>
+						</div>
+
+						<div>
+							<label>Estado : </label>
+							<br>
+							<select class="form-control" aria-label="Default select example"
+								th:field="*{EstadoCotizacion}">
+
+								<option value="ABONADO">Abonado</option>
+								<option value="PAGO">Pago</option>
+							</select>
+						</div>
+
+
+						<div>
+							<button type="reset" class="btn btn-success">Limpiar</button>
+						</div>
+						<div>
+							<button th:onclick="guardarCotizacion()" class="btn btn-success">Guardar</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Formulario-->
+
+
+
+
+
+</body>
+
+</html>
