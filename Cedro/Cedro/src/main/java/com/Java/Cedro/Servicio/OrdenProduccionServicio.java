@@ -15,4 +15,7 @@ public List<OrdenProduccion> listarTodosLasOrdenes();
 	public OrdenProduccion actualizarOrden(OrdenProduccion orden);
 	
 	public void eliminarOrden(Integer id_orden_de_produccion);
+	
+	/*DTO*/
+	void llenarVenta(Integer idOrdenProduccion);
 }

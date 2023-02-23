@@ -1,6 +1,5 @@
-   
-function eliminarDiseno(id_diseno) {
-	console.log(id_diseno);
+function eliminarTela(id_telas) {
+	console.log(id_telas);
 	swal({
 		  title: "¿Esta seguro de Eliminar?",
 		  text: "Una vez eliminado no se prodra restablecer!",
@@ -11,39 +10,30 @@ function eliminarDiseno(id_diseno) {
 		.then((OK) => {
 		  if (OK) {
 			  $.ajax({
-				 url:"/disenos/"+id_diseno,
+				 url:"/cloth/"+id_telas,
 				 success: function(res) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Diseño eliminado!", {
+		    swal("Poof! Tela eliminada!", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
-		    		location.href="/disenos";
+		    		location.href="/cloth";
 		    	}
 		    });
 		  } 
 		});
 }
 
-function guardarDiseno(){
+function guardarTela(){
 	
 	alert("Se han guardado los cambios")
 	
 }
 
-function crearDiseno(){
+function crearTela(){
 	
-	alert("Se ha creado un nuevo diseño")	
+	alert("Se ha creado una nueva tela")
 	
 }
-
-   
-
-
-
-
-
-
-

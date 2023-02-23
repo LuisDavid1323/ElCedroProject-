@@ -35,7 +35,7 @@ public class DisenoControlador {
 
 	@PostMapping("/disenos")
 	public String guardarDiseno(@ModelAttribute("diseno") Diseno diseno) {
-		servicio.listarTodosLosDisenos();
+		servicio.guardarDiseno(diseno);
 		return "redirect:/disenos";
 	}
 
@@ -47,7 +47,7 @@ public class DisenoControlador {
 	}
 
 	@PostMapping("disenos/{id}")
-	public String actualizarEstudiante(@PathVariable Integer id, @ModelAttribute("diseno") Diseno diseno,
+	public String actualizarDiseno(@PathVariable Integer id, @ModelAttribute("diseno") Diseno diseno,
 			Model modelo) {
 		Diseno d = servicio.obtenerDisenoPorId(id);
 
@@ -55,6 +55,12 @@ public class DisenoControlador {
 		d.setNombre_d(diseno.getNombre_d());
 
 		servicio.actualizarDiseno(diseno);
+		return "redirect:/disenos";
+	}
+	
+	@GetMapping("disenos/{id}")
+	public String eliminarDiseno(@PathVariable Integer id) {
+		servicio.eliminarDiseno(id);
 		return "redirect:/disenos";
 	}
 

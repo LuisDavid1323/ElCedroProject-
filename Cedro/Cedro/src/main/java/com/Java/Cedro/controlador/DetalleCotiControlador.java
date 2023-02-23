@@ -79,7 +79,7 @@ public class DetalleCotiControlador {
 	
 	@RequestMapping(value="DetalleCo", method=RequestMethod.POST)
 	public String guardarDetalleCo(@ModelAttribute DetalleCotizacionDTO detalleCotizacion) {
-		System.out.println("Cantidad: " + detalleCotizacion.getCantidad());
+		
 	
 		DCservicio.guardarDetalle(detalleCotizacion);
 		return "redirect:cotizacion-cliente";

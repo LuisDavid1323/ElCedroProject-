@@ -49,7 +49,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				"/CSS/**",
 				"/IMG/**",
 				"/login**",
-				"/Recuperar**").permitAll()
+				"/Recuperar**",
+				"/telas**",
+				"/prueba/upload",
+				"/prueba/subir",
+				"/prueba/cargar").permitAll()
 		.antMatchers().hasRole("Cliente")
 		.antMatchers("/cotizaciones/nuevo**").hasAuthority("Administrador")
 		.antMatchers("/administradores/**").hasAuthority("Administrador")

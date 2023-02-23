@@ -1,6 +1,5 @@
-   
-function eliminarDiseno(id_diseno) {
-	console.log(id_diseno);
+function eliminarMadera(Id_maderas) {
+	console.log(Id_maderas);
 	swal({
 		  title: "¿Esta seguro de Eliminar?",
 		  text: "Una vez eliminado no se prodra restablecer!",
@@ -11,39 +10,30 @@ function eliminarDiseno(id_diseno) {
 		.then((OK) => {
 		  if (OK) {
 			  $.ajax({
-				 url:"/disenos/"+id_diseno,
+				 url:"/maderas/"+Id_maderas,
 				 success: function(res) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Diseño eliminado!", {
+		    swal("Poof! Madera eliminada!", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){
-		    		location.href="/disenos";
+		    		location.href="/maderas";
 		    	}
 		    });
 		  } 
 		});
 }
 
-function guardarDiseno(){
+function guardarMadera(){
 	
 	alert("Se han guardado los cambios")
 	
 }
 
-function crearDiseno(){
+function crearMadera(){
 	
-	alert("Se ha creado un nuevo diseño")	
+	alert("Se ha creado un nuevo registro de madera")
 	
 }
-
-   
-
-
-
-
-
-
-

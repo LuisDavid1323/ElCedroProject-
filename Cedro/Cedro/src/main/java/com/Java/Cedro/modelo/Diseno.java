@@ -71,9 +71,21 @@ public class Diseno implements Serializable{
 		return serialVersionUID;
 	}
 
+
+	public void setId_diseno(Integer id_diseno) {
+		this.id_diseno = id_diseno;
+	}
+
+
+	
     
     
-   
+   //Constructor
+	
+	public Diseno() {
+		super();
+	}
+
     
     
 	

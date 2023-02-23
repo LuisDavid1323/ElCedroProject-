@@ -15,7 +15,7 @@ function eliminarProducto(id_producto) {
 					console.log(res);
 				},			
 			  });
-		    swal("Poof! Registro eliminado!", {
+		    swal("Poof! Producto eliminado!", {
 		      icon: "success",
 		    }).then((ok)=>{
 		    	if(ok){

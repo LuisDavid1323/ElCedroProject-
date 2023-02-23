@@ -3,17 +3,17 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Lista de Insumo</title>
+	<title>Maderas</title>
 	<!-- CSS y Bootstrap -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="InsumoCSS/Insumo.css">
+	<link rel="stylesheet" href="MaderaCSS/Maderas.css">
 	<link rel="stylesheet" href="CSS/Slide - Menú.css">
 	<!-- CSS y Bootstrap -->
 
@@ -30,7 +30,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="/js/dataTables.js"></script>
 
-	<script src="/InsumoCSS/Alert.js"></script>
+	<script src="/MaderaCSS/Alert.js"></script>
 	<script src="/js/Slide - menú.js"></script>
 
 	/*Exportar*/
@@ -64,14 +64,14 @@
 			<!--Menu-->
 
 
-			<!--Tabla Insumos-->
+			<!--Tabla woods-->
 			<div class="container">
 
-				<h1>Lista de Insumos</h1>
+				<h1>Maderas</h1>
 
 				<!--CargarArchivos-->
 				<center>
-					<form th:action="@{/prueba/cargar}" method="POST" enctype="multipart/form-data">
+					<form th:action="@{/prueba/upload}" method="POST" enctype="multipart/form-data">
 						<div class="row" id="c">
 
 							<!--Alerts-->
@@ -80,7 +80,7 @@
 								<div class="alert alert-success">Carga Realizada Correctamente</div>
 							</div>
 							<div th:if=${param.fallo}>
-								<div class="alert alert-danger" role="alert">El archivo seleccionado ya se encuentra
+								<div class="alert alert-danger" role="alert">El archivo seleccionado ya se encuentra 
 									cargado</div>
 							</div>
 
@@ -104,51 +104,46 @@
 
 				<!--CargarArchivos-->
 
-				<div class="row">
-					<div>
-						<a th:href="@{/insumos/nuevo}" class="Cs">Nuevo Insumo</a>
+				<!--Exportar-->
+				<div class="row" id="c">
+
+					<div class="form-group col-md-2" id="c">
+						<a th:href="@{/maderas/nuevo}" class="Cs">Nueva madera</a>
 					</div>
 
-					<div class="col-lg-1">
+					<div class="form-group col-md-1" id="c">
 						<a onclick="test()" class="CsP" title="Descargar en pdf">
 							<img src="img/pdf.svg" style="height: 25px;width: 25px;"></a>
 					</div>
 
-					<div>
+					<div class="form-group col-md-1" id="c">
 						<a onclick="exportTableToExcel('usuarios')" class="CsE" title="Descargar en xls">
 							<img src="img/excel.svg" style="height: 25px;width: 25px;"></a>
 					</div>
 
 
 				</div>
+				<!--Exportar-->
+
 				<br>
-				<table class="table table-striped table-bordered" id="usuarios">
+				<table class="table table-striped table-hover" id="usuarios">
 					<thead class="ColorT">
 						<tr>
-							<th>Id</th>
-							<th>Nombre</th>
-							<th>Categoria Insumo</th>
-							<th>Unidad Medida</th>
+					
+							<th>Id madera</th>
+							<th>Nombre madera</th>
 							<th>Precio</th>
-							<th>Stock</th>
-							<th>Distribuidor</th>
-							<th>Teléfono distribuidor</th>
-
-
-
 							<th>Acciones</th>
+					
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="i : ${insumos}">
-							<td th:text="${i.id_insumo}">Id</td>
-							<td th:text="${i.Nombre}">Nombre</td>
-							<td th:text="${i.Id_categoria_insumo_fk.Nombre_categoria_insumos}">Categoria</td>
-							<td th:text="${i.Unidad_de_medida}">Apellido</td>
-							<td th:text="${i.Precio}">Tipo documento</td>
-							<td th:text="${i.Stock}">Documento</td>
-							<td th:text="${i.Distribuidor}">Direccion</td>
-							<td th:text="${i.Tel_distribuidor}">Teléfono</td>
+						<tr th:each="m : ${maderas}">
+							<td th:text="${m.Id_maderas}">Id</td>
+							<td th:text="${m.Nombre_madera}">Id detalle producción</td>
+							<td th:text="${m.Precio}">Id Venta</td>
+
+
 
 
 
@@ -157,12 +152,17 @@
 							<!--Botones Acciones-->
 							<td>
 
-								<a th:href="@{/insumos/editar/{id}(id=${i.id_insumo})}" class="btn btn-info">
-									<img src="img/Edit.svg"></a>
+								<center>
+
+									<a th:href="@{/maderas/editar/{id}(id=${m.Id_maderas})}"
+										class="btn btn-info">
+										<img src="img/Edit.svg"></a>
 
 
-								<a th:onclick="eliminarinsumo([[${i.id_insumo}]])" class="btn btn-danger">
-									<img src="img/bx-trash-alt.svg"></a>
+									<a th:onclick="eliminarMadera([[${m.Id_maderas}]])" class="btn btn-danger">
+										<img src="img/bx-trash-alt.svg"></a>
+
+								</center>
 
 							</td>
 							<!--Botones Acciones-->
@@ -206,7 +206,6 @@
 				</div>
 
 			</footer>
-
 
 			<!--footer-->
 

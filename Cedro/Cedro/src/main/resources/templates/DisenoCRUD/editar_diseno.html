@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Editar diseño</title>
 	<!-- CSS y Bootstrap -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -30,6 +30,7 @@
 
 <body>
 	<!--JavaScript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
 	<script src="/DisenoCSS/Alert.js"></script>
 	<script src="/js/validar.js"></script>
 	<script src="/js/Slide - menú.js"></script>
@@ -55,17 +56,17 @@
 			<div class="">
 				<h1>Editar diseños</h1>
 				<div>
-					<form th:action="@{/disenos}" th:object="${disenos}" method="POST">
+					<form th:action="@{/disenos/{id}(id=${disenos.id_diseno})}" th:object="${disenos}" method="POST">
 						<div>
 							<label>Diseño : </label>
-							<input th:onkeypress="return SoloLetras(event);" type="text" name="Diseño"
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="Diseno"
 								th:field="*{Nombre_d}" class="form-control" placeholder="Escriba los nuevos datos"
 								required>
 						</div>
 
 						<div>
 
-							<button th:onclick="guardarusuario()" class="btn btn-success">Guardar</button>
+							<button th:onclick="guardarDiseno()" class="btn btn-success">Guardar</button>
 						</div>
 					</form>
 				</div>

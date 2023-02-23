@@ -3,20 +3,20 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Editar Orden de producción</title>
-	<!-- CSS y Bootstrap -->
+	<title>Nueva Tela</title>
+	<!-- CSS and Bootstrap -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="/ProductosCSS/Productos-Editar.css">
+	<link rel="stylesheet" href="/TelasCSS/Telas-Crear.css">
 	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+	<!-- CSS and Bootstrap -->
 
-	<!-- CSS y Bootstrap -->
-
-	<!-- Logo -->
-	<link rel="icon" href="/IMG/table.svg" />
-	<!-- Logo -->
+</head>
+<!-- Logo -->
+<link rel="icon" href="/IMG/table.svg" />
+<!-- Logo -->
 </head>
 
 <!--Header-->
@@ -29,8 +29,9 @@
 <!--Header-->
 
 <body>
+
 	<!--JavaScript-->
-	<script src="/OrdenpCSS/Alert.js"></script>
+	<script src="/TelasCSS/Alert.js"></script>
 	<script src="/js/validar.js"></script>
 	<script src="/js/Slide - menú.js"></script>
 	<!--JavaScript-->
@@ -38,8 +39,8 @@
 	<!--Menu-->
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="#">Inicio</a>
-		<a href="/productosCRUD">Productos</a>
+		<a href="index">Inicio</a>
+		<a href="/telasCRUD">Telas</a>
 		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
 	</div>
 
@@ -48,43 +49,47 @@
 	</div>
 	<!--Menu-->
 
-	<!--Formulario-->
 
+
+
+
+	<br>
 	<div class="formulario">
 		<div class="row">
-			<div class="">
-				<h1>Editar Orden</h1>
-				<div>
-					<form th:action="@{/productosCRUD/{id}(id=${productos.id_producto})}" th:object="${productos}" method="POST">
+			<div>
+				<h1>Nueva tela</h1>
+				<div class="card-body">
+					<form th:action="@{/telasCRUD}" th:object="${telas}" method="POST">
+
 
 						<div>
-							<label>Nombre producto : </label>
+							<label>Nombre tela : </label>
 							<input th:onkeypress="return SoloLetras(event);" type="text" name="Nombre"
-								th:field="*{Nombre_producto}" class="form-control"
+								th:field="*{Nombre_tela}" class="form-control"
 								placeholder="Escriba los nuevos datos" required>
 						</div>
-
+						
 						<br>
 						<div>
 							<label>Precio : </label>
 							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Precio"
-								th:field="*{Precio}" class="form-control" placeholder="Escriba el precio del producto"
+								th:field="*{Valor}" class="form-control" placeholder="Escriba el precio del producto"
 								required>
 						</div>
 
 						<div>
-							<button th:onclick="guardarOrdenp()" class="btn btn-success">Guardar</button>
+							<button type="reset" class="btn btn-success">Limpiar</button>
 						</div>
+
+						<div>
+							<button th:onclick="crearTela" class="btn btn-success">Guardar</button>
+						</div>
+
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!--Formulario-->
-
-
-
 
 
 </body>

@@ -7,11 +7,11 @@
 	<!-- CSS y Bootstrap -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 	<link rel="stylesheet" href="DisenoCSS/Disenos.css">
 	<link rel="stylesheet" href="CSS/Slide - Menú.css">
@@ -64,30 +64,69 @@
 			<!--Menu-->
 
 
-			<!--Tabla Usuarios-->
+
+			<!--Tabla disenos-->
 			<div class="container">
 
 				<h1>Lista de diseños</h1>
 
-				<div class="row">
-					<div>
-						<a th:href="@{/disenos/nuevo}" class="Cs">Nuevo diseños</a>
+				<!--CargarArchivos-->
+				<center>
+					<form th:action="@{/prueba/cargar2}" method="POST" enctype="multipart/form-data">
+						<div class="row" id="c">
+
+							<!--Alerts-->
+						
+								<div th:if=${param.exito}>
+									<div class="alert alert-success">Carga Realizada Correctamente</div>
+								</div>
+								<div th:if=${param.fallo}>
+									<div class="alert alert-danger" role="alert">El archivo seleccionado ya se encuentra cargado</div>
+								</div>
+					
+							<!--Alerts-->
+
+							<!--TypeFile and Button-->
+							<div class="form-group col-md-11" id="c">
+								<input type="file" name="files" onchange="" class="form-control" id="formFileSm"
+									required="required">
+								<label class="custom-file-label" for="formFileSm"
+									aria-describedby="inputGroupFileAddon02">Selecciona archivo para la carga
+									masiva</label>
+							</div>
+							<div class="form-group col-md-1" id="c">
+								<button  class="btn btn-outline-primary">Subir</button>
+							</div>
+							<!--TypeFile and Button-->
+						</div>
+					</form>
+				</center>
+
+				<!--CargarArchivos-->
+
+				<!--Exportar-->
+				<div class="row" id="c">
+
+					<div class="form-group col-md-2" id="c">
+						<a th:href="@{/disenos/nuevo}" class="Cs">Nuevo diseño</a>
 					</div>
 
-					<div class="col-lg-1">
+					<div class="form-group col-md-1" id="c">
 						<a onclick="test()" class="CsP" title="Descargar en pdf">
 							<img src="img/pdf.svg" style="height: 25px;width: 25px;"></a>
 					</div>
 
-					<div>
+					<div class="form-group col-md-1" id="c">
 						<a onclick="exportTableToExcel('usuarios')" class="CsE" title="Descargar en xls">
 							<img src="img/excel.svg" style="height: 25px;width: 25px;"></a>
 					</div>
 
 
 				</div>
+				<!--Exportar-->
+
 				<br>
-				<table class="table table-striped table-bordered" id="usuarios">
+				<table class="table table-striped table-hover" id="usuarios">
 					<thead class="ColorT">
 						<tr>
 							<th>Id</th>
@@ -117,7 +156,7 @@
 										<img src="img/Edit.svg"></a>
 
 
-									<a th:onclick="eliminar([[${d.id_diseno}]])" class="btn btn-danger">
+									<a th:onclick="eliminarDiseno([[${d.id_diseno}]])" class="btn btn-danger">
 										<img src="img/bx-trash-alt.svg"></a>
 								</center>
 							</td>

@@ -42,4 +42,10 @@ public class OrdenProduccionServicioImpl implements OrdenProduccionServicio{
 		
 	}
 
+	@Override
+	public void llenarVenta(Integer idOrdenProduccion) {
+		
+		
+	}
+
 }

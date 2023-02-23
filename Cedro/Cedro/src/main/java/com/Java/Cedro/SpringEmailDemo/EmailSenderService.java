@@ -40,5 +40,6 @@ public class EmailSenderService implements EmailServicio {
         Transport transport = session.getTransport();
         transport.connect("smtp.gmail.com", "maderasfinasoficial@gmail.com", "qhxcnxmqlhfgljuk");
         transport.sendMessage(msg, msg.getAllRecipients());
+        //MaderasFinasPassword qhxcnxmqlhfgljuk
     }
 }

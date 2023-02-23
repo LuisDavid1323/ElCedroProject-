@@ -22,7 +22,7 @@ public class Categoria_Insumo implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_categoria_insumos;
+	private Double id_categoria_insumos;
 	
 	@Column(name="Nombre_categoria_insumos")
 	private  String Nombre_categoria_insumos;
@@ -34,11 +34,11 @@ public class Categoria_Insumo implements Serializable{
 	
 	
 	/*Getters and Setters*/
-	public Integer getId_categoria_insumos() {
+	public Double getId_categoria_insumos() {
 		return id_categoria_insumos;
 	}
 
-	public void setId_categoria_insumos(Integer id_categoria_insumos) {
+	public void setId_categoria_insumos(Double id_categoria_insumos) {
 		this.id_categoria_insumos = id_categoria_insumos;
 	}
 
