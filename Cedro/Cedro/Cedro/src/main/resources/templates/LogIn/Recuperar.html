@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<!--Logo-->
+	<link rel="icon" type="image/jpg" href="img/User.svg" />
+	<!--Logo-->
+
+	<meta charset="UTF-8">
+	<title>El Cedro - Restablecer contraseña </title>
+	<meta name="viewport"
+		content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+	<!--CSS-->
+	<link rel="stylesheet" href="/CSS/Recuperar.css">
+	<!--CSS-->
+
+	<style>
+		.formulario {
+			margin-top: 15%;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<!--Video-->
+	<div>
+		<video autoplay loop muted plays-inline id="myVideo">
+			<source src="/Videos/LogIn-2.mp4" type="video/webm">
+			<source src="/Videos/LogIn-2.mp4" type="video/ogg">
+			<source src="/Videos/LogIn-2.mp4" type="video/mp4">
+		</video>
+	</div>
+	<!--Video-->
+
+	<!--JavaScript-->
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<script src="js/InicioSesion.js"></script>
+	<form class="formulario" style="margin-left: 50%;margin-top: 17%;">
+		<!--JavaScript-->
+
+		<h1>Recupera tu cuenta</h1>
+		<div class="contenedor">
+
+			<p>Ingresa tu dirección de correo electrónico de recuperación</p>
+
+			<br>
+
+
+			<div class="input-contenedor">
+				<i class="fas fa-envelope icon"></i>
+				<input type="text" id="email" placeholder="Correo Electronico" required>
+			</div>
+
+
+			<a onclick="recuperar()">
+				<input type="button" value="Continuar" th:href="@{/login}" class="button" button>
+			</a>
+			<br><br>
+		</div>
+	</form>
+</body>
+
+</html>

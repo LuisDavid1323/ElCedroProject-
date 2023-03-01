@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>El Cedro - Cotizar</title>
+	<!-- CSS y Bootstrap -->
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="CSS/CotizarC.css">
+	<link rel="stylesheet" href="CSS/Slide - Menú.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
+	<script src="js/jsPDF/dist/jspdf.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="Social bar/font.css">
+	<link rel="stylesheet" href="Social bar/main.css">
+	<link rel="stylesheet" href="Social bar/style.css">
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/cotizar.svg" />
+	<!-- Logo -->
+</head>
+
+<body>
+
+	<!--Alerta Inicio-->
+	<script>
+
+		function Send() {
+			event.preventDefault();
+
+			Swal.fire({
+				title: '¿Seguro de enviar la cotización?',
+				text: 'Al aceptar te llegará un link de pago a tu correo electrónico',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Si',
+				cancelButtonText: "No",
+				confirmButtonColor: '#DBBA9D',
+				cancelButtonColor: '#d33',
+			}).then((result) => {
+				if (result.value) {
+					document.formulario_registro.submit();
+				}
+				return false;
+			})
+		}
+
+
+
+		//swal({
+		//	title: "Recuerda!",
+		//	text: "que esta cotización es solo una aproximación al precio real del producto. Comunicate con nosotros via Whatsapp para hacer tu cotización.",
+		//	imageUrl: "images/thumbs-up.jpg"
+		//});
+
+		function valor() {
+			const selectProducto = document.getElementById('producto');
+			const selectTela = document.getElementById('tela');
+			const selectMadera = document.getElementById('madera');
+			const precioProductoSeleccionado = Number(selectProducto.options[selectProducto.selectedIndex].dataset.precio);
+			const precioTelaSeleccionado = Number(selectTela.options[selectTela.selectedIndex].dataset.precio);
+			const precioMaderaSeleccionado = Number(selectMadera.options[selectMadera.selectedIndex].dataset.precio);
+			const cantidad = document.getElementById('cantidad').value;
+			document.getElementById('result').innerHTML = ((precioProductoSeleccionado + precioTelaSeleccionado + precioMaderaSeleccionado) * cantidad);
+		}
+
+		function AlertaPrecio() {
+			Swal.fire({
+				title: 'Este será el precio de tu cotización. Pulsa el boton "Guardar" para realizar la compra.  ',
+				showClass: {
+					popup: 'animate__animated animate__fadeInDown'
+				},
+				hideClass: {
+					popup: 'animate__animated animate__bounce animate__slower	6s'
+				}
+			})
+		}
+
+	</script>
+	<!--Alerta Inicio-->
+
+
+	<!--JavaScript-->
+	<script src="/js/NoTeVayas.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<script src="/js/MensajeIndex.js"></script>
+	<script src="/js/validar.js"></script>
+
+	<script src="/js/ExportarCotizacion.js"></script>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jsPDF/dist/jspdf.min.js"></script>
+
+	/Exportar/
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
+	<script src="/js/Exportar TABLE.js"></script>
+	<script src="/js/html2pdf.bundle.js"></script>
+	/Exportar/
+
+	<!--JavaScript-->
+
+	<!--Mensaje-->
+	<script>
+		function Cerrar() {
+			var resultado = window.confirm('Estas seguro?');
+			if (resultado === true) {
+				window.alert('Okay, si estas seguro.');
+			} else {
+				return false
+			}
+		}
+	</script>
+	<!--Mensaje-->
+
+
+
+	<!--Header-->
+	<header>
+
+		<a href="">
+			<img src="/IMG/Header-web.png" title="El Cedro" style="margin-top:-2% ; width: 100%; " />
+
+	</header>
+	<!--Header-->
+
+	<!--Menu-->
+	<div class="container" style="max-width: 150%;">
+		<div class="tutorial">
+			<ul>
+				<a href="index">
+					<li>Inicio</li>
+				</a>
+
+				<th:block sec:authorize="isAnonymous()">
+					<a href="/login">
+						<li>Iniciar sesión <i class="fa-solid fa-arrow-right-to-bracket"></i></li>
+				</th:block>
+
+				</a>
+				<li>Inspiraciones <i class="fa fa-angle-down"></i>
+					<ul style="max-width: 120%;">
+						<a href="https://www.calameo.com/read/0064764772511493c05db" target="_blank">
+							<li>Salas</li>
+						</a>
+						<a href="https://www.calameo.com/read/0064764772aef44efd3a8" target="_blank">
+							<li>Comedores</li>
+						</a>
+						<a href="https://www.calameo.com/read/0064764770940b817492e" target="_blank">
+							<li>Armarios</li>
+						</a>
+						<a href="https://www.calameo.com/read/006476477ff6d6f41cc58" target="_blank">
+							<li>Alcobas</li>
+						</a>
+					</ul>
+				</li>
+
+				<th:block sec:authorize="hasAuthority('Administrador')">
+					<a href="/administradores">
+						<li>Administrador</li><a />
+				</th:block>
+
+				<th:block sec:authorize="hasAuthority('Jefe de produccion')">
+					<a href="/dashboardP">
+						<li>Jefe de producción</li><a />
+				</th:block>
+
+				<th:block sec:authorize="hasAuthority('Vendedor')">
+					<a href="/dashboardV">
+						<li> Vendedor</li><a />
+				</th:block>
+
+				<a onclick="mensaje()">
+					<li>Contactanos</li><a />
+
+					<!--Usuario y cerrar sesion-->
+
+					<div onclick="Cerrar()" sec:authorize="isAuthenticated()"
+						style="float: right; text-decoration: none;">
+						<a style="color: black; " sec:authorize="isAuthenticated()" title="Cerrar sesión"
+							th:href="@{/logout}">
+							<img src="/IMG/turn-off.png" style="max-width: 17px;margin-top: -4%;"></img>
+						</a>
+						<li title="usuario actual" sec:authentication="principal.username"></li>
+					</div>
+
+					<!--Usuario y cerrar sesion-->
+			</ul>
+		</div>
+	</div>
+	<!--Menu-->
+
+	<!--Contenido-->
+
+	<!--Social bar-->
+	<div class="social-bar" style="margin-top: 5%;">
+		<a href="https://www.facebook.com/Maderas-Finas-101500835023458/?modal=admin_todo_tour" target="_blank"
+			class="icon icon-facebook"></a>
+		<a href="https://wa.link/2rn9mf" target="_blank" class="icon icon-whatsapp"></a>
+		<a href="https://www.instagram.com/" target="_blank" class="icon icon-instagram"></a>
+	</div>
+	<!--Social bar-->
+
+	<!--Formulario-->
+	<br>
+	<center>
+		<div class="formulario" id="c">
+			<div>
+				<div>
+					<h1>Cotizar</h1>
+					<div class="card-body">
+						<form th:action="DetalleCo" method="post" th:object="${detalleCotizacion}" onsubmit="Send()"
+							name="formulario_registro">
+
+							<div class="row">
+								<!--Lista productos-->
+								<div class="form-group col-md-6">
+									<label for="producto">Productos:</label>
+									<select id="producto" class="form-control" th:field="*{id_producto_fk}" required>
+										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
+										<option value="#">Selecciona un producto</option>
+										<th:block th:each="producto : ${productos}">
+											<option id="select1" th:value="${producto.id_producto}"
+												th:text="${producto.nombre_producto}"
+												th:data-precio="${producto.precio}" required></option>
+										</th:block>
+									</select>
+								</div>
+								<br>
+								<!--Lista productos-->
+
+								<!--Disenos-->
+								<div class="form-group col-md-6" id="c">
+									<label for="diseno">Diseños:</label>
+									<select id="diseno" name="id_diseno_fk" class="form-control">
+										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
+										<option value="#">Selecciona un diseño</option>
+										<th:block th:each="d : ${d}">
+											<option th:value="${d.id_diseno}" th:text="${d.Nombre_d}"></option>
+										</th:block>
+									</select>
+								</div>
+							</div>
+
+
+							<!--Disenos-->
+
+							<!--Tipo tela-->
+							<div class="row" id="c">
+								<div class="form-group col-md-6" id="c">
+									<label for="#" title="Solo si aplica">Tipo de tela:</label>
+									<select id="tela" name="id_tela_fk" class="form-control">
+										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
+										<option value="#">Selecciona un tipo de tela</option>
+										<th:block th:each=" telas: ${telas}">
+											<option th:value="${telas.id_telas}" th:text="${telas.Nombre_tela}"
+												th:data-precio="${telas.valor}">
+											</option>
+										</th:block>
+									</select>
+								</div>
+								<!--Tipo tela-->
+
+								<!--Color Tela-->
+								<div class="form-group col-md-6" id="c">
+									<label for="#" title="Solo si aplica">Color Tela:</label><br>
+									<input name="color_tela" id="colort" type="color" title="Solo si aplica"
+										class="form-control" th:field="*{color_tela}">
+								</div>
+							</div>
+							<!--Color Tela-->
+
+							<!--Tipo Madera-->
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="#">Tipo de madera:</label>
+									<select id="madera" name="id_maderas_fk" class="form-control">
+										<option value="#">Selecciona un tipo de madera</option>
+										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
+										<th:block th:each=" maderas: ${maderas}">
+											<option th:value="${maderas.Id_maderas}" th:text="${maderas.Nombre_madera}"
+												th:data-precio="${maderas.precio}">
+											</option>
+										</th:block>
+									</select>
+								</div>
+								<!--Tipo Madera-->
+
+								<!--Color Madera-->
+								<div class="form-group col-md-6">
+									<label for="#">Color madera:</label><br>
+									<select id="colorm" name="color_madera" required class="form-control"
+										th:field="*{Color_madera}">
+										<option value="#">Selecciona un color</option>
+										<option value="Miel">Miel</option>
+										<option value="Wengue">Wengue</option>
+										<option value="Blanco">Blanco</option>
+										<option value="Gris">Gris</option>
+										<option value="Caramelo">Caramelo</option>
+										<option value="Cedro">Cedro</option>
+										<option value="Natural">Natural</option>
+									</select>
+								</div>
+							</div>
+							<!--Color Madera-->
+
+							<!--Cantidad-->
+							<div class="row">
+								<div class="form-group col-md-6">
+
+									<label for="#">Cantidad:</label><br>
+									<input type="text" id="cantidad" th:onkeypress="return SoloNumeros(event);"
+										placeholder="Cantidad de productos" class="form-control" th:field="*{cantidad}">
+								</div>
+								<!--Cantidad-->
+
+								<!--Categoria productos-->
+								<div class="form-group col-md-6">
+									<label for="#">Categoria produto:</label>
+									<select id="categoria" name="categoria" class="form-control"
+										th:field="*{id_Categoria_producto_fk}">
+										<option value="#">Selecciona una categoria de productos</option>
+										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
+										<th:block th:each=" categorias: ${CategoriaP}">
+											<option th:value="${categorias.id_categorias_productos}"
+												th:text="${categorias.Nombre_categoria}">
+											</option>
+										</th:block>
+									</select>
+								</div>
+							</div>
+							<!--Categoria productos-->
+							<!--Medidas-->
+							<div class="row">
+								<div class="col-sm-4 col-xs-4">
+									<label for="#">Alto:</label><br>
+									<input type="text" id="Alto" th:onkeypress="return SoloNumeros(event);"
+										placeholder="Medida en cm" class="form-control" th:field="*{Alto}">
+								</div>
+
+								<div class="col-sm-4 col-xs-4">
+									<label for="#">Ancho:</label><br>
+									<input type="text" id="Ancho" th:onkeypress="return SoloNumeros(event);"
+										placeholder="Medida en cm" class="form-control" th:field="*{Ancho}">
+								</div>
+
+								<div class="col-sm-4 col-xs-4">
+									<label for="#">Fondo:</label><br>
+									<input type="text" id="Fondo" th:onkeypress="return SoloNumeros(event);"
+										placeholder="Medida en cm" class="form-control" th:field="*{Fondo}">
+								</div>
+							</div>
+							<br>
+							<div>
+								<h4>Valor cotización:</h4>
+								<textarea readonly type="text" id="result" title="Aqui se verá el precio" 
+									style="text-align: center;font-size: 30px;height: 60px;" placeholder="$ COP"
+									class="form-control"></textarea>
+							</div>
+							<!--Medidas-->
+							<br>
+							<!--Botones-->
+							<div class="row">
+								<div class="col-sm-12 col-xs-12">
+									<input type="button" onclick="onclick= AlertaPrecio() ; valor()"
+										class="btn btn-success" id="calcularValorCotizacion" value="Generar precio"
+										title="Precio de la cotización">
+
+									<a onclick="expo()"> <button type="button" class="btn btn-success"
+											title="Descargar cotización"><i
+												class="fa-solid fa-file-arrow-down"></i></button></a>
+									<input type="submit" class="btn btn-success" value="Guardar"
+										title="Crear cotización">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</center>
+
+
+	<!--Formulario-->
+
+
+	<!--Contenido-->
+
+
+	<!--footer-->
+
+	<footer style="margin-top: -30%;">
+		<div class="footer-content">
+			<h3 style="color: black;">El Cedro</h3>
+			<p>El Cedro es un sistema de información encargado de la gestión de ventas, inventario y
+				producción de la empresa Madera Finas.
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com/Maderas-Finas-101500835023458/?modal=admin_todo_tour"><i
+							class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></i></a></li>
+				<li><a href="https://wa.link/2rn9mf"><i class="fa-brands fa-whatsapp"></i></a></li>
+				<li><a href="https://www.youtube.com/channel/UC9bGWjljEqoiyDs4LK2I0lw"><i class="fa fa-youtube"></i></a>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2023 El Cedro </p>
+			<div class="footer-menu">
+				<ul class="f-menu">
+					<li><a href="index">Inicio</a></li>
+					<li style="cursor: pointer;"><a onclick="mensaje()">Contactanos</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--footer-->
+
+
+
+</body>

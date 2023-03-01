@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Registro de usuarios</title>
+	<!-- CSS and Bootstrap -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="/UsuarioCSS/Usuario-crear.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+	<!-- CSS and Bootstrap -->
+
+</head>
+<!-- Logo -->
+<link rel="icon" href="/IMG/table.svg" />
+<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+
+	<!--JavaScript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+	<script src="/UsuarioCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index">Inicio</a>
+		<a href="/users">Usuarios</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+
+
+
+
+	<br>
+	<div class="formulario">
+		<div class="row">
+			<div>
+				<h1>Nuevo usuario</h1>
+				<div class="card-body">
+					<form th:action="@{/users}" th:object="${usuarios}" method="POST">
+
+						<div>
+							<label>Nombres : </label>
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="Nombre"
+								th:field="*{nombre}" class="form-control" placeholder="Escriba los nuevos datos"
+								required>
+						</div>
+
+						<div>
+							<label>Apellidos : </label>
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="Apellido"
+								th:field="*{apellido}" class="form-control" placeholder="Escriba los nuevos datos "
+								required>
+						</div>
+
+						<div>
+							<label>Tipo de documento : </label>
+							<br>
+							<select class="form-control" aria-label="Default select example"
+								th:field="*{tipo_documento}">
+
+								<option value="Cedula">Cedula</option>
+								<option value="Cedula de extranjeria">Cedula de extranjeria</option>
+								<option value="Pasaporte">Pasaporte</option>
+							</select>
+						</div>
+
+						<div>
+							<label>Documento : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Numero_documento"
+								th:field="*{numero_documento}" class="form-control"
+								placeholder="Escriba el nuevo número de documento" required>
+						</div>
+
+						<div>
+							<label>Dirección : </label>
+							<input type="text" name="Direccion" th:field="*{direccion}" class="form-control"
+								placeholder="Escriba la nueva dirección " required>
+						</div>
+
+						<div>
+							<label>Teléfono : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Telefono"
+								th:field="*{telefono}" class="form-control" placeholder="Escriba el nuevo teléfono"
+								required maxlength="10" minlength="10">
+						</div>
+
+						<div>
+							<label>Correo : </label>
+							<input type="email" name="Correo" th:field="*{email}" class="form-control"
+								placeholder="Escriba el nuevo correo electrónico " required>
+						</div>
+
+						<br>
+						<label>Rol : </label>
+						<th:block th:each="roles :${rol}">
+							<div>
+
+								<input type="checkbox" name="roles" th:field="*{roles}" th:text="${roles.nombre}"
+									th:value="${roles.id_rol}" class="form-control"></input>
+							</div>
+						</th:block> <input type="hidden" th:field="*{id_usuario}" th:value="${usuarios.id_usuario}">
+
+
+						<div>
+							<button type="reset" class="btn btn-success">Limpiar</button>
+						</div>
+						<div>
+							<button th:onclick="crearusuario()" class="btn btn-success">Guardar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

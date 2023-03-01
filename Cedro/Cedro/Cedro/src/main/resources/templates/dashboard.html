@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>El Cedro - Administrador</title>
+	<!-- CSS y Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="CSS/dashboard.css">
+	<link rel="stylesheet" href="CSS/Slide - Menú.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- CSS y Bootstrap -->
+
+	<!-- Logo -->
+	<link rel="icon" href="/IMG/dashboard.svg" />
+	<!-- Logo -->
+</head>
+
+<body>
+	<script>
+		swal(
+			"Bienvenido al Dashboard de Administrador"
+		)
+
+		$(document).ready(function () {
+			$('.js-example-basic-single').select2();
+		});
+
+	</script>
+	
+	<!--Mensaje-->
+	<script>
+		function Cerrar() {
+			var resultado = window.confirm('Estas seguro?');
+			if (resultado === true) {
+				window.alert('Okay, si estas seguro.');
+			} else {
+				
+			}
+		}
+	</script>
+	<!--Mensaje-->
+
+
+
+	<!--JavaScript-->
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<script src="/js/Logout.js"></script>
+
+	<!--JavaScript-->
+
+
+
+
+	<!--Header-->
+	<header>
+
+		<a href="">
+			<img src="/IMG/Header-Dashboard.png" title="Dashboard - Administrador"
+				style="margin-top:-2% ; width: 100%; " />
+
+	</header>
+	<!--Header-->
+
+	<!--Menu-->
+	<br>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index">Inicio</a>
+		<div onclick="Cerrar()">
+		<a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+		Cerrar sesión
+		</a>
+		</div>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+	<!--Bienvenida-->
+	<center>
+		<h4 style="color: #d3a47b;font-size: 350%;text-shadow: black 0.1em 0.1em 1em;font-weight: 600;">
+			Bienvenido
+
+		</h4>
+		<h4 style="font-weight: 650;" sec:authentication="principal.username"></h4>
+	</center>
+
+	<!--Bienvenida-->
+
+	<!--Contenido-->
+
+	<div class="row" id="Card">
+		<div class="example-1 card">
+			<div class="wrapper">
+
+				<div class="data">
+					<div class="content">
+
+						<h1 class="title">Administrador</h1>
+
+						<form name="selectR">
+							<select class="js-example-basic-single" style="width: 100%;margin-top: 10%;" name="roles">
+
+								<option value="users">Usuarios</option>
+								<option value="insumos">Insumos</option>
+								<option value="entradas">Entradas</option>
+								<option value="salidas">Salidas</option>
+								<option value="ventas">Ventas</option>
+								<option value="cotizaciones">Cotizaciones</option>
+								<option value="DetalleCo">Detalle cotización</option>
+								<option value="ordenesp">Ordenes de producción</option>
+								<option value="productosCRUD">Productos</option>
+								<option value="disenos">Diseños</option>
+								<option value="maderas">Maderas</option>
+								<option value="cloth">Telas</option>
+							</select>
+
+							<a href="#">
+								<input value="Ir" id="submit" class="button" title="Ingresar" type="submit"
+									onclick="window.open(selectR.roles.value);" style="cursor: pointer;">
+							</a>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!--Contenido-->
+
+
+	<!--footer-->
+
+	<footer style="margin-top: 10%;width: 100%;">
+
+		<div class="footer-content">
+			<h3 style="color: black;">El Cedro</h3>
+			<p>El Cedro es un sistema de información encargado de la gestión de ventas, inventario y
+				producción de la empresa Madera Finas.
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com/Maderas-Finas-101500835023458/?modal=admin_todo_tour"><i
+							class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></i></a></li>
+				<li><a href="https://wa.link/2rn9mf"><i class="fa-brands fa-whatsapp"></i></a></li>
+				<li><a href="https://www.youtube.com/channel/UC9bGWjljEqoiyDs4LK2I0lw"><i class="fa fa-youtube"></i></a>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-bottom" style="width: 100%;">
+			<p>copyright &copy;2023 El Cedro </p>
+			<div class="footer-menu">
+				<ul class="f-menu">
+					<li><a href="index">Inicio</a></li>
+					<li style="cursor: pointer;"><a onclick="mensaje()">Contactanos</a></li>
+
+				</ul>
+			</div>
+		</div>
+
+	</footer>
+
+
+	<!--footer-->
+
+
+
+</body>
+
+</html>

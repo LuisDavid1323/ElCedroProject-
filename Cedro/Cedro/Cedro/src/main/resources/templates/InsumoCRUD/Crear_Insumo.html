@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Registro de Insumo</title>
+	<!-- CSS and Bootstrap -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/InsumoCSS/Insumo-Crear.css">
+	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
+	<!-- CSS and Bootstrap -->
+
+</head>
+<!-- Logo -->
+<link rel="icon" href="/IMG/table.svg" />
+<!-- Logo -->
+</head>
+
+<!--Header-->
+<header>
+
+	<a class="">
+		<img src="/IMG/Header-Administradores.png.gif" style="margin-top:-1% ; width: 100.1%; " />
+
+</header>
+<!--Header-->
+
+<body>
+
+	<!--JavaScript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+	<script src="/InsumoCSS/Alert.js"></script>
+	<script src="/js/validar.js"></script>
+	<script src="/js/Slide - menú.js"></script>
+	<!--JavaScript-->
+
+	<!--Menu-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index">Inicio</a>
+		<a href="/insumos">Insumos</a>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="Menu">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+	</div>
+	<!--Menu-->
+
+
+
+
+
+	<br>
+	<div class="formulario">
+		<div class="row">
+			<div>
+				<h1>Nuevo insumo</h1>
+				<div class="card-body">
+					<form th:action="@{/insumos}" th:object="${insumos}" method="POST">
+						<div>
+							<label>Nombre : </label>
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="nombre"
+								th:field="*{Nombre}" class="form-control" placeholder="Digite el nombre del insumo "
+								required>
+						</div>
+
+						<div>
+							<label>Categoria : </label>
+							<select class="form-control" th:field="*{Id_categoria_insumo_fk}" required>
+								<th:block th:each="ca : ${lstCategoria}">
+									<option th:text="${ca.Nombre_categoria_insumos}"
+										th:value="${ca.id_categoria_insumos}"></option>
+								</th:block>
+							</select>
+						</div>
+
+
+						<div>
+							<label>Unidad de medida : </label>
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="Unidad_de_medida"
+								th:field="*{Unidad_de_medida}" class="form-control"
+								placeholder="Digite la unidad de medida del insumo " required>
+						</div>
+
+						<div>
+							<label>Precio : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Precio"
+								th:field="*{Precio}" class="form-control" placeholder="Digite número de contacto  "
+								required>
+						</div>
+
+						<div>
+							<label>Stock : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Stock"
+								th:field="*{Stock}" class="form-control" placeholder="Digie la cantidad actual "
+								required>
+						</div>
+
+						<div>
+							<label>Distribuidor : </label>
+							<input th:onkeypress="return SoloLetras(event);" type="text" name="Distribuidor"
+								th:field="*{Distribuidor}" class="form-control"
+								placeholder="Digite el nombre del distribuidor " required>
+						</div>
+
+
+						<div>
+							<label>Telefono distribuidor : </label>
+							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Tel_distribuidor"
+								th:field="*{Tel_distribuidor}" class="form-control"
+								placeholder="Digite número de contacto del distribuidor  " required maxlength="10">
+						</div>
+
+
+
+						<div>
+							<button type="reset" class="btn btn-success">Limpiar</button>
+						</div>
+						<div>
+							<button th:onclick="crearinsumo()" class="btn btn-success">Guardar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
