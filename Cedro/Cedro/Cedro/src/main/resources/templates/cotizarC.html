@@ -25,7 +25,7 @@
 	<!-- CSS y Bootstrap -->
 
 	<!-- Logo -->
-	<link rel="icon" href="/IMG/cotizar.svg" />
+	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2150/2150264.png" />
 	<!-- Logo -->
 </head>
 
@@ -225,7 +225,7 @@
 							<div class="row">
 								<!--Lista productos-->
 								<div class="form-group col-md-6">
-									<label for="producto">Productos:</label>
+									<label for="producto"><b>Productos:</b></label>
 									<select id="producto" class="form-control" th:field="*{id_producto_fk}" required>
 										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
 										<option value="#">Selecciona un producto</option>
@@ -241,7 +241,7 @@
 
 								<!--Disenos-->
 								<div class="form-group col-md-6" id="c">
-									<label for="diseno">Diseños:</label>
+									<label for="diseno"><b>Diseños:</b></label>
 									<select id="diseno" name="id_diseno_fk" class="form-control">
 										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
 										<option value="#">Selecciona un diseño</option>
@@ -258,7 +258,7 @@
 							<!--Tipo tela-->
 							<div class="row" id="c">
 								<div class="form-group col-md-6" id="c">
-									<label for="#" title="Solo si aplica">Tipo de tela:</label>
+									<label for="#" title="Solo si aplica"><b>Tipo de tela:</b></label>
 									<select id="tela" name="id_tela_fk" class="form-control">
 										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
 										<option value="#">Selecciona un tipo de tela</option>
@@ -273,7 +273,7 @@
 
 								<!--Color Tela-->
 								<div class="form-group col-md-6" id="c">
-									<label for="#" title="Solo si aplica">Color Tela:</label><br>
+									<label for="#" title="Solo si aplica"><b>Color Tela:</b></label><br>
 									<input name="color_tela" id="colort" type="color" title="Solo si aplica"
 										class="form-control" th:field="*{color_tela}">
 								</div>
@@ -283,7 +283,7 @@
 							<!--Tipo Madera-->
 							<div class="row">
 								<div class="form-group col-md-6">
-									<label for="#">Tipo de madera:</label>
+									<label for="#"><b>Tipo de madera:</b></label>
 									<select id="madera" name="id_maderas_fk" class="form-control">
 										<option value="#">Selecciona un tipo de madera</option>
 										<!-- Iterar sobre la lista de productos y mostrar cada opción -->
@@ -298,7 +298,7 @@
 
 								<!--Color Madera-->
 								<div class="form-group col-md-6">
-									<label for="#">Color madera:</label><br>
+									<label for="#"><b>Color madera:</b></label><br>
 									<select id="colorm" name="color_madera" required class="form-control"
 										th:field="*{Color_madera}">
 										<option value="#">Selecciona un color</option>
@@ -318,7 +318,7 @@
 							<div class="row">
 								<div class="form-group col-md-6">
 
-									<label for="#">Cantidad:</label><br>
+									<label for="#"><b>Cantidad:</b></label><br>
 									<input type="text" id="cantidad" th:onkeypress="return SoloNumeros(event);"
 										placeholder="Cantidad de productos" class="form-control" th:field="*{cantidad}">
 								</div>
@@ -326,7 +326,7 @@
 
 								<!--Categoria productos-->
 								<div class="form-group col-md-6">
-									<label for="#">Categoria produto:</label>
+									<label for="#"><b>Categoria produto:</b></label>
 									<select id="categoria" name="categoria" class="form-control"
 										th:field="*{id_Categoria_producto_fk}">
 										<option value="#">Selecciona una categoria de productos</option>
@@ -343,44 +343,55 @@
 							<!--Medidas-->
 							<div class="row">
 								<div class="col-sm-4 col-xs-4">
-									<label for="#">Alto:</label><br>
+									<label for="#"><b>Alto:</b></label><br>
 									<input type="text" id="Alto" th:onkeypress="return SoloNumeros(event);"
 										placeholder="Medida en cm" class="form-control" th:field="*{Alto}">
 								</div>
 
 								<div class="col-sm-4 col-xs-4">
-									<label for="#">Ancho:</label><br>
+									<label for="#"><b>Ancho:</b></label><br>
 									<input type="text" id="Ancho" th:onkeypress="return SoloNumeros(event);"
 										placeholder="Medida en cm" class="form-control" th:field="*{Ancho}">
 								</div>
 
 								<div class="col-sm-4 col-xs-4">
-									<label for="#">Fondo:</label><br>
+									<label for="#"><b>Fondo:</b></label><br>
 									<input type="text" id="Fondo" th:onkeypress="return SoloNumeros(event);"
 										placeholder="Medida en cm" class="form-control" th:field="*{Fondo}">
 								</div>
 							</div>
 							<br>
 							<div>
-								<h4>Valor cotización:</h4>
-								<textarea readonly type="text" id="result" title="Aqui se verá el precio" 
+								<h4><b>Valor cotización:</b></h4>
+								<textarea readonly type="text" id="result" title="Aqui se verá el precio"
 									style="text-align: center;font-size: 30px;height: 60px;" placeholder="$ COP"
 									class="form-control"></textarea>
 							</div>
 							<!--Medidas-->
-							<br>
+							
 							<!--Botones-->
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
-									<input type="button" onclick="onclick= AlertaPrecio() ; valor()"
-										class="btn btn-success" id="calcularValorCotizacion" value="Generar precio"
-										title="Precio de la cotización">
+									<a onclick="onclick= AlertaPrecio() ; valor()">
+										<button type="button" class="btn" id="calcularValorCotizacion" value="Generar precio"
+											title="Generar precio de la cotización">
+											<center>
+												<img class="email-notification" src="/IMG/price-tag.png">
+											</center>
+										</button>
+									</a>
 
-									<a onclick="expo()"> <button type="button" class="btn btn-success"
-											title="Descargar cotización"><i
-												class="fa-solid fa-file-arrow-down"></i></button></a>
-									<input type="submit" class="btn btn-success" value="Guardar"
-										title="Crear cotización">
+									<a onclick="expo()"> <button type="button" class="btn" title="Descargar cotización">
+											<center>
+												<img class="email-notification" src="/IMG/pdf.png">
+											</center>
+										</button></a>
+
+									<button type="submit" class="btn" title="Crear y enviar cotización">
+										<center>
+											<img class="email-notification" src="/IMG/send.png">
+										</center>
+									</button>
 								</div>
 							</div>
 						</form>
@@ -390,6 +401,11 @@
 		</div>
 
 	</center>
+
+
+
+
+
 
 
 	<!--Formulario-->

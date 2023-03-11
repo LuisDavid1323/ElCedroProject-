@@ -189,12 +189,12 @@ public class DetalleCotizacionServicioImpl implements DetalleCotizacionServicio 
 		
 		page = page.replace("URL", '"'+ url + '"');
 		try {
-			this.emailServicio.enviarEmail(getUsuario().getEmail(),"Hola, " + getUsuario().getNombre() + " " + getUsuario().getApellido() + " paga tu cotización", page);
+			this.emailServicio.enviarEmail(getUsuario().getEmail(),"🛒 Hola, " + getUsuario().getNombre() + " " + getUsuario().getApellido() + " paga tu cotización 💰", page);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return saved;

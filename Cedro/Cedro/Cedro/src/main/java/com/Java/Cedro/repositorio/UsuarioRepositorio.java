@@ -9,8 +9,9 @@ import com.Java.Cedro.modelo.Usuario;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	
 	
-	Usuario findByEmail(String email);
-
-
+	 Usuario findByEmail(String email);
+	
+	
+	public Usuario findByResetPasswordToken(String token);
 
 }

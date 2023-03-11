@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	
+
 	<link rel="stylesheet" href="/EntradaCSS/Entrada-Crear.css">
 	<link rel="stylesheet" href="/CSS/Slide - Menú.css">
 	<!-- CSS and Bootstrap -->
@@ -75,13 +75,14 @@
 						<div>
 							<label>Cantidad : </label>
 							<input th:onkeypress="return SoloNumeros(event);" type="text" name="Cantidad"
-								th:field="*{Cantidad}" class="form-control"
-								placeholder="Digite la cantidad de entrada " required>
+								th:field="*{Cantidad}" class="form-control" placeholder="Cantidad mayor a 0 "
+								required>
 						</div>
 
 						<div>
 							<label>Fecha : </label>
-							<input type="date" name="Precio" th:field="*{Fecha}" class="form-control" required>
+							<input type="date" name="Precio" th:field="*{Fecha}" class="form-control" required
+								min="2023-01-01" max="2023-12-31">
 						</div>
 
 
@@ -100,7 +101,7 @@
 		</div>
 	</div>
 
-	
+
 </body>
 
 </html>

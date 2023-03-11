@@ -3,9 +3,9 @@
 
 
 <head>
-	<!--Logo-->
-	<link rel="icon" type="image/jpg" href="img/User.svg" />
-	<!--Logo-->
+	<!-- Logo -->
+	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/665/665049.png" />
+	<!-- Logo -->
 
 	<meta charset="UTF-8">
 	<title>El Cedro - Restablecer contraseña </title>
@@ -30,6 +30,12 @@
 </head>
 
 <body>
+	<!--Alertas-->
+	<div th:if="${error != null}">
+		<p class="text-danger">[[${error}]]
+		</p>
+	</div>
+	<!--Alertas-->
 
 	<!--Video-->
 	<div>
@@ -46,7 +52,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script src="js/InicioSesion.js"></script>
-	<form class="formulario" style="margin-left: 50%;margin-top: 17%;">
+	<form th:action="@{/forgot_password}" method="POST" class="formulario" style="margin-left: 50%;margin-top: 17%;">
 		<!--JavaScript-->
 
 		<h1>Recupera tu cuenta</h1>
@@ -59,12 +65,12 @@
 
 			<div class="input-contenedor">
 				<i class="fas fa-envelope icon"></i>
-				<input type="text" id="email" placeholder="Correo Electronico" required>
+				<input type="text" id="email" placeholder="Correo Electronico" required name="email">
 			</div>
 
 
 			<a onclick="recuperar()">
-				<input type="button" value="Continuar" th:href="@{/login}" class="button" button>
+				<input type="submit" value="Continuar" th:href="@{/login}" class="button" button>
 			</a>
 			<br><br>
 		</div>

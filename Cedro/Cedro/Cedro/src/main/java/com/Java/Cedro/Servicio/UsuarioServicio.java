@@ -2,6 +2,8 @@ package com.Java.Cedro.Servicio;
 
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.Java.Cedro.UsuarioNoEncontrado;
 import com.Java.Cedro.controlador.dto.UsuarioRegistroDTO;
 import com.Java.Cedro.modelo.Usuario;
 
@@ -20,5 +22,10 @@ public interface UsuarioServicio extends UserDetailsService {
 	public Usuario guardar(UsuarioRegistroDTO registroDTO);
 
 	public List<Usuario> listarUsuarios();
+	
 
+
+	
+	
+	
 }

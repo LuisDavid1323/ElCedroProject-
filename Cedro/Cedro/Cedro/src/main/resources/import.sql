@@ -38,6 +38,11 @@ INSERT INTO `Disenos`(`Nombre_d`) VALUES ('Rustico');
 INSERT INTO `categoria_insumos`(`nombre_categoria_insumos`) VALUES ('Herramienta');
 INSERT INTO `categoria_insumos`(`nombre_categoria_insumos`) VALUES ('Insumo');
 
+/*Insumos*/
+INSERT INTO `insumos`(`tel_distribuidor`,`distribuidor`,`nombre`,`precio`,`stock`,`unidad_de_medida`,`id_categoria_insumo_fk`) VALUES ('3123138632','Andres Santiago Pineda','Puntillas','5000','500','pulgadas','2');
+INSERT INTO `insumos`(`tel_distribuidor`,`distribuidor`,`nombre`,`precio`,`stock`,`unidad_de_medida`,`id_categoria_insumo_fk`) VALUES ('3203113386','Jose Uldarico Yañez','Tornillos','6000','500','pulgadas','2');
+INSERT INTO `insumos`(`tel_distribuidor`,`distribuidor`,`nombre`,`precio`,`stock`,`unidad_de_medida`,`id_categoria_insumo_fk`) VALUES ('3123138632','Andres Santiago Pineda','Martillos','35000','10','centimetros','1');
+
 
 
 

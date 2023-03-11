@@ -21,32 +21,32 @@ public class EnviarEmailSchedule {
 	@Autowired
 	private UsuarioRepositorio userRepositorio;
 	
-	//@Scheduled(fixedRate = 3600000)
-	//public void ejecutarSchedule() {
-	//	List<Usuario> lstUsuarios = this.userRepositorio.findAll();
-	//	lstUsuarios.forEach(usuario -> { 
-	//		String pageF = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
-	//				+ "<HTML>\r\n"
-	//				+ "\r\n"
-	//				+ "<HEAD>\r\n"
-	//				+ "   <meta charset=\"utf-8\">\r\n"
-	//				+ "   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-	//				+ "   <style>\r\n"
-	//				+ "      * {\r\n"
-	//				+ "         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n"
-	//				+ "      }\r\n"
-	//				+ "      a{\r\n"
-	//				+ "         text-decoration: none;\r\n"
-	//				+ "         color: #DBBA9D;\r\n"
-	//				+ "      }\r\n"
+//	@Scheduled(fixedRate = 3600000)
+//	public void ejecutarSchedule() {
+//		List<Usuario> lstUsuarios = this.userRepositorio.findAll();
+//		lstUsuarios.forEach(usuario -> { 
+//			String pageF = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
+//					+ "<HTML>\r\n"
+//					+ "\r\n"
+//					+ "<HEAD>\r\n"
+//					+ "   <meta charset=\"utf-8\">\r\n"
+//					+ "   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+//					+ "   <style>\r\n"
+//					+ "      * {\r\n"
+//					+ "         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n"
+//					+ "      }\r\n"
+//					+ "      a{\r\n"
+//					+ "         text-decoration: none;\r\n"
+//					+ "         color: #DBBA9D;\r\n"
+//					+ "      }\r\n"
 //					+ "      a:hover{\r\n"
 //					+ "         color:#663E39 ;\r\n"
 //					+ "      }\r\n"
 //					+ "   </style>\r\n"
 //					+ "\r\n"
 //					+ "   <TITLE>Maderas Finas - flyer</TITLE>\r\n"
-//					+ "   \r\n"
-//					+ "</HEAD>\r\n"
+//				+ "   \r\n"
+//				+ "</HEAD>\r\n"
 //					+ "\r\n"
 //					+ "<BODY style=\"margin: 0; padding: 0;\">   \r\n"
 //					+ "  \r\n"
@@ -86,7 +86,7 @@ public class EnviarEmailSchedule {
 //					+ "\r\n"
 //					+ "</HTML>";
 //			try {
-//				this.emailServicio.enviarEmail(usuario.getEmail(), "Hola, " + usuario.getNombre() + ' ' +usuario.getApellido()+ " tenemos una nueva oferta para ti.", pageF);
+//				this.emailServicio.enviarEmail(usuario.getEmail(), "📌 Hola, " + usuario.getNombre() + ' ' +usuario.getApellido()+ " tenemos una nueva oferta para ti.", pageF);
 //			} catch (UnsupportedEncodingException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();

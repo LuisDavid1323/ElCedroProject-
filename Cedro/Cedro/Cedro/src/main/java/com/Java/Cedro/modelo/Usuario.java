@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Usuario {
@@ -45,6 +47,9 @@ public class Usuario {
 	
 	private String email;
 	private String password;
+	
+	@Column(name="resetPasswordToken", length = 30)
+	private String resetPasswordToken;
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
@@ -160,6 +165,15 @@ public class Usuario {
 
 	public void setListCotizacion(List<Cotizacion> listCotizacion) {
 		ListCotizacion = listCotizacion;
+	}
+	
+
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
 	}
 
 	public Usuario(Long id_usuario, String nombre, String apellido, String tipo_documento, String numero_documento,

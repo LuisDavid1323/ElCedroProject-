@@ -20,7 +20,7 @@ public class SalidaServicioImpl implements SalidaServicio{
 	@Autowired
 	private InsumoRepositorio insumoRepositorio;
 	
-	
+
 	@Override
 	public List<Salida> listarTodosLasSalidas() {
 		return salidaRepositorio.findAll();

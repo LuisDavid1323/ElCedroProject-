@@ -4,7 +4,9 @@ package com.Java.Cedro.servicioImpl;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.Java.Cedro.UsuarioNoEncontrado;
 import com.Java.Cedro.Servicio.UsuarioServicio;
 import com.Java.Cedro.controlador.dto.UsuarioRegistroDTO;
 import com.Java.Cedro.modelo.Rol;
@@ -21,9 +24,10 @@ import com.Java.Cedro.repositorio.RolRepositorio;
 import com.Java.Cedro.repositorio.UsuarioRepositorio;
 
 @Service
+@Transactional
 public class UsuarioServicioImpl implements UsuarioServicio {
 
-	
+	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 
 	@Autowired
@@ -93,9 +97,44 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepositorio.findAll();
 	}
+	
+	//ResetPassword
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio2;
+	
+	public void updateResetPasswordToken(String token, String email) throws UsuarioNoEncontrado {
+		Usuario usuario = usuarioRepositorio2.findByEmail(email);
+		
+		if(usuario != null) {
+		   usuario.setResetPasswordToken(token);
+		   usuarioRepositorio2.save(usuario);
+		   
+		}else {
+			throw new UsuarioNoEncontrado("No se encontró el usuario con el correo: " + email);
+		}
+
+	}
+
+	public Usuario get(String token) {
+	
+		return usuarioRepositorio2.findByResetPasswordToken(token);
+	}
 
 	
-
+	public void updatePassword(Usuario usuario, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodePassword = passwordEncoder.encode(newPassword);
+		
+		usuario.setPassword(encodePassword);
+		usuario.setResetPasswordToken(null);
+		
+		usuarioRepositorio2.save(usuario);
+		
+	}
 	
 
 }
+
+
+
+

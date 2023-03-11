@@ -66,7 +66,8 @@
 							<label>Orden de producción : </label>
 							<select class="form-control" th:field="*{id_orden_pro_fk}" required>
 								<th:block th:each="Orden : ${lstO}">
-									<option th:text="${Orden.id_orden_de_produccion}" th:value="${Orden.id_orden_de_produccion}"></option>
+									<option th:text="${Orden.id_orden_de_produccion}"
+										th:value="${Orden.id_orden_de_produccion}"></option>
 								</th:block>
 							</select>
 						</div>
@@ -75,21 +76,22 @@
 							<label>Insumo : </label>
 							<select class="form-control" th:field="*{Id_insumo_fk}" required th:name="idInsumo">
 								<th:block th:each="I : ${lstI}">
-									<option th:text="${I.Nombre}" th:value="${I.Id_insumo}" id="id" ></option>
+									<option th:text="${I.Nombre}" th:value="${I.Id_insumo}" id="id"></option>
 								</th:block>
 							</select>
 						</div>
 
 						<div>
 							<label>Fecha : </label>
-							<input type="date" name="Fecha" th:field="*{Fecha}" class="form-control" required>
+							<input type="date" th:field="*{Fecha}" class="form-control" 
+							required min="2023-01-01" max="2023-12-31">
 						</div>
 
 						<div>
 							<label>Cantidad : </label>
 							<input th:onkeypress="return SoloNumeros(event);" type="text" th:name="cantidad"
 								th:field="*{Cantidad}" class="form-control"
-								placeholder="Digite la cantidad de la salida " required>
+								placeholder="Cantidad mayor a 0 " required>
 						</div>
 
 						<br>
@@ -102,10 +104,10 @@
 						</div>
 
 					</form>
-					
-	
-					
-					
+
+
+
+
 				</div>
 			</div>
 		</div>

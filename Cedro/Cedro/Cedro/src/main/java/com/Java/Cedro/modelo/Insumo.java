@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 
@@ -41,6 +42,7 @@ public class Insumo implements Serializable{
 	private String precio;
 	
 	@Column(name="Stock")
+	@Size(min = 1)
 	private Integer stock;
 	
 	@Column(name="Distribuidor")
